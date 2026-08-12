@@ -2,18 +2,15 @@
 
 ExitScene::ExitScene() {}
 
-ExitScene *ExitScene::get()
-{
+ExitScene *ExitScene::get() {
     return &sExitScene;
 }
 
-bool ExitScene::enter()
-{
+bool ExitScene::enter() {
     return true;
 }
     
-bool ExitScene::exit()
-{
+bool ExitScene::exit() {
     return true;
 }
 

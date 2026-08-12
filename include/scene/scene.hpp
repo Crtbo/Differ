@@ -1,8 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 
-class Scene
-{
+class Scene {
     public:
         virtual bool enter() = 0;
         virtual bool exit() = 0;

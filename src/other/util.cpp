@@ -4,8 +4,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <string>
 
-void initiate()
-{
+void initiate() {
     SDL_Init(SDL_INIT_VIDEO);
     SDL_CreateWindowAndRenderer("unnamed game", kScreenWidth, kScreenHeight, 0, &gWindow, &gRenderer);
     TTF_Init();
@@ -15,8 +14,7 @@ void initiate()
     gTitleFont = TTF_OpenFont(fontPath.c_str(), 36);
 }
 
-void close()
-{
+void close() {
     TTF_CloseFont(gMainFont);
     gMainFont = nullptr;
     TTF_CloseFont(gTitleFont);

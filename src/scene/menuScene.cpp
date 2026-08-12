@@ -2,18 +2,15 @@
 
 MenuScene::MenuScene() {}
 
-MenuScene *MenuScene::get()
-{
+MenuScene *MenuScene::get() {
     return &sMenuScene;
 }
 
-bool MenuScene::enter()
-{
+bool MenuScene::enter() {
     return true;
 }
     
-bool MenuScene::exit()
-{
+bool MenuScene::exit() {
     return true;
 }
 

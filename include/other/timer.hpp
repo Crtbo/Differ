@@ -1,8 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 
-class Timer
-{
+class Timer {
     private:
         Uint64 mStartTicks;
 

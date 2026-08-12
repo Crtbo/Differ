@@ -1,8 +1,7 @@
 #pragma once
 #include "scene.hpp"
 
-class ExitScene : public Scene
-{
+class ExitScene : public Scene {
     private:
         static ExitScene sExitScene;
 

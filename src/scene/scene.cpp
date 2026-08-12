@@ -1,14 +1,12 @@
 #include "../../include/scene/scene.hpp"
 #include "../../include/scene/ExitScene.hpp"
 
-void setNextScene(Scene *newScene)
-{
+void setNextScene(Scene *newScene) {
     if (gNextScene != ExitScene::get())
         gNextScene = newScene;
 }
 
-bool changeScene()
-{
+bool changeScene() {
     bool success = true;
 
     if (gNextScene != nullptr)

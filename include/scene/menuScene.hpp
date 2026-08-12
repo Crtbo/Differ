@@ -1,8 +1,7 @@
 #pragma once
 #include "scene.hpp"
 
-class MenuScene : public Scene
-{
+class MenuScene : public Scene {
     private:
         static MenuScene sMenuScene;
 
