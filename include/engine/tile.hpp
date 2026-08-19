@@ -2,8 +2,7 @@
 #include "texture.hpp"
 #include <SDL3/SDL.h>
 
-class Tile
-{
+class Tile {
     SDL_FRect mBox;
     int mType;
 

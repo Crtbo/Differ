@@ -2,15 +2,13 @@
 #include "../../include/other/global.hpp"
 #include <SDL3_image/SDL_image.h>
 
-Texture::Texture()
-{
+Texture::Texture() {
     mTexture = nullptr;
     mWidth = 0;
     mHeight = 0;
 }
 
-bool Texture::loadFromFile(std::string path)
-{
+bool Texture::loadFromFile(std::string path) {
     destroy();
 
     if (SDL_Surface *loadedSurface = IMG_Load(path.c_str()); loadedSurface == nullptr)
@@ -33,8 +31,7 @@ bool Texture::loadFromFile(std::string path)
     return mTexture != nullptr;
 }
 
-bool Texture::loadFromRenderedText(std::string textureText, SDL_Color textColor, TTF_Font *font)
-{
+bool Texture::loadFromRenderedText(std::string textureText, SDL_Color textColor, TTF_Font *font) {
     destroy();
 
     if (SDL_Surface* textSurface = TTF_RenderText_Solid(font, textureText.c_str(), textureText.length(), textColor); textSurface == nullptr)
@@ -53,16 +50,14 @@ bool Texture::loadFromRenderedText(std::string textureText, SDL_Color textColor,
     return mTexture != nullptr;
 }
 
-void Texture::destroy()
-{
+void Texture::destroy() {
     SDL_DestroyTexture(mTexture);
     mTexture = nullptr;
     mWidth = 0;
     mHeight = 0;
 }
 
-void Texture::render(float x, float y, SDL_FRect *clip)
-{
+void Texture::render(float x, float y, SDL_FRect *clip) {
     SDL_FRect dstRect = {x, y, (float)mWidth, (float)mHeight};
     
     if (clip != nullptr)
@@ -74,17 +69,14 @@ void Texture::render(float x, float y, SDL_FRect *clip)
     SDL_RenderTexture(gRenderer, mTexture, clip, &dstRect);
 }
 
-int Texture::getWidth()
-{
+int Texture::getWidth() {
     return mWidth;
 }
 
-int Texture::getHeight()
-{
+int Texture::getHeight() {
     return mHeight;
 }
 
-bool Texture::isLoaded()
-{
+bool Texture::isLoaded() {
     return mTexture != nullptr;
 }

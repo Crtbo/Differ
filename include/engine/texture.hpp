@@ -3,8 +3,7 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <string>
 
-class Texture
-{
+class Texture {
     SDL_Texture *mTexture;
     int mWidth;
     int mHeight;
