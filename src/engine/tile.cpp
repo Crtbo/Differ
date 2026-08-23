@@ -1,7 +1,7 @@
-#include "tile.hpp"
-#include "../other/const.hpp"
-#include "../other/global.hpp"
-#include "../other/util.hpp"
+#include "../../include/engine/tile.hpp"
+#include "../../include/other/const.hpp"
+#include "../../include/other/global.hpp"
+#include <fstream>
 
 Tile::Tile(int x, int y, int tileType) {
     mBox.x = x;
@@ -22,4 +22,28 @@ int Tile::getType() {
 
 SDL_FRect Tile::getBox() {
     return mBox;
+}
+
+void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path)
+{
+    tiles.clear();
+    int x = 0, y = 0;
+    std::ifstream map(path);
+
+    int tileType;
+    while (map >> tileType)
+    {
+        tiles.emplace_back(x, y, tileType);
+
+        x += kTileWidth;
+        if (x >= mapWidth)
+        {
+            x = 0;
+            y += kTileHeight;
+        }
+    }
+
+    gTileClips[kTileAir] = {0, 0, kTileWidth, kTileHeight};
+    gTileClips[kTileLand] = {kTileWidth, 0, kTileWidth, kTileHeight};  
+    map.close();
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "texture.hpp"
 #include <SDL3/SDL.h>
+#include <string>
+#include <vector>
 
 class Tile {
     SDL_FRect mBox;
@@ -12,3 +14,5 @@ public:
     int getType();
     SDL_FRect getBox();
 };
+
+void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path);
