@@ -1,15 +1,21 @@
 #include "../include/other/const.hpp"
 #include "../include/other/global.hpp"
 #include "../include/other/timer.hpp"
-#include "../include/other/util.hpp"
 #include "../include/scene/exitScene.hpp"
 #include "../include/scene/menuScene.hpp"
+#include <SDL3_image/SDL_image.h>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
 int main() {
     srand(time(nullptr));
-    initiate();
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_CreateWindowAndRenderer("unnamed game", kScreenWidth, kScreenHeight, 0, &gWindow, &gRenderer);
+    TTF_Init();
+    std::string fontPath{"assets/fonts/PixelOperator-Bold.ttf"};
+    gMainFont = TTF_OpenFont(fontPath.c_str(), 27);
+    gTitleFont = TTF_OpenFont(fontPath.c_str(), 36);
     SDL_Event event;
     SDL_zero(event);
     Timer capTimer;
@@ -47,6 +53,17 @@ int main() {
         if (frameNs < nsPerFrame) SDL_DelayNS(nsPerFrame - frameNs);
     }
 
-    close();
+    TTF_CloseFont(gMainFont);
+    gMainFont = nullptr;
+    TTF_CloseFont(gTitleFont);
+    gTitleFont = nullptr;
+
+    SDL_DestroyRenderer(gRenderer);
+    gRenderer = nullptr;
+    SDL_DestroyWindow(gWindow);
+    gWindow = nullptr;
+
+    TTF_Quit();
+    SDL_Quit();
     return 0;
 }
