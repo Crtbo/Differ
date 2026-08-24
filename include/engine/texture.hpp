@@ -4,19 +4,20 @@
 #include <string>
 
 class Texture {
-    SDL_Texture *mTexture;
-    int mWidth;
-    int mHeight;
+    private:
+        SDL_Texture *mTexture;
+        int mWidth;
+        int mHeight;
 
-public:
-    Texture();
-    bool loadFromFile(std::string);
-    bool loadFromRenderedText(std::string, SDL_Color, TTF_Font *);
-    void destroy();
-    void render(float, float, SDL_FRect *clip = nullptr);
-    int getWidth();
-    int getHeight();
-    bool isLoaded();
+    public:
+        Texture();
+        bool loadFromFile(std::string);
+        bool loadFromRenderedText(std::string, SDL_Color, TTF_Font *);
+        void destroy();
+        void render(float, float, SDL_FRect *clip = nullptr);
+        int getWidth();
+        int getHeight();
+        bool isLoaded();
 };
 
 bool checkCollision(SDL_FRect a, SDL_FRect b);
