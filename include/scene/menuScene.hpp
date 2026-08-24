@@ -7,11 +7,11 @@
 
 class MenuScene : public Scene {
     private:
-        int mapWidth;
-        int mapHeight;
+        int mMapWidth;
+        int mMapHeight;
         Texture mTileTexture;
-        std::vector <Tile> tiles;
-        SDL_FRect camera = {0, 0, kScreenWidth, kScreenHeight};
+        std::vector <Tile> mTiles;
+        SDL_FRect mCamera = {0, 0, kScreenWidth, kScreenHeight};
         static MenuScene sMenuScene;
 
         MenuScene();

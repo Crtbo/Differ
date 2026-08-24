@@ -2,15 +2,15 @@
 
 bool MenuScene::enter() {
     std::string path = "assets/maps/level1.map";
-    mapWidth = 304;
-    mapHeight = 160;
+    mMapWidth = 304;
+    mMapHeight = 160;
     mTileTexture.loadFromFile("assets/images/tiles.png");
-    setTiles(tiles, mapWidth, path);
+    setTiles(mTiles, mMapWidth, path);
     return true;
 }
     
 bool MenuScene::exit() {
-    tiles.clear();
+    mTiles.clear();
     mTileTexture.destroy();
     return true;
 }
@@ -18,12 +18,12 @@ bool MenuScene::exit() {
 void MenuScene::handleEvent(SDL_Event &event) {}
 
 void MenuScene::logic() {
-    SDL_Log("Hello: %d", tiles.size());
+
 }
 
 void MenuScene::render() {
-    for (int i = 0; i < tiles.size(); i++)
-        tiles[i].render(camera, mTileTexture);
+    for (int i = 0; i < mTiles.size(); i++)
+        mTiles[i].render(mCamera, mTileTexture);
 }
 
 MenuScene::MenuScene() {}
