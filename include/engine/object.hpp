@@ -2,7 +2,7 @@
 #include <SDL3/SDL.h>
 
 class Object {
-    private:
+    protected:
         int mVel;
         SDL_FPoint mPos;
         SDL_FRect mHitBox;
