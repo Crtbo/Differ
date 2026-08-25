@@ -1,17 +1,16 @@
-#include "player.hpp"
-#include "../other/util.hpp"
+#include "../../include/engine/player.hpp"
 
 void Player::handleEvent(SDL_Event &e)
 {
 
 }
 
-void Player::move(int width, int height)
+void Player::move()
 {
    
 }
 
-void Player::setPlayer(int x, int y)
+void Player::setPlayer(float x, float y)
 {
     mPos = {x, y};
     mVel = 3;
@@ -19,8 +18,8 @@ void Player::setPlayer(int x, int y)
 
 void Player::setCamera(SDL_FRect &camera, int width, int height)
 {
-    camera.x = (int)(mPosX + kPlayerWidth / 2 - kScreenWidth / 2);
-    camera.y = (int)(mPosY + kPlayerHeight / 2 - kScreenHeight / 2);
+    camera.x = (int)(mPos.x / 2 - kScreenWidth / 2);
+    camera.y = (int)(mPos.y / 2 - kScreenHeight / 2);
 
     if (camera.x < 0)
         camera.x = 0;
