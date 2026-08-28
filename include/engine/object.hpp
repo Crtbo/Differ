@@ -10,4 +10,8 @@ class Object {
     public:
         SDL_FPoint getPos();
         SDL_FRect getHitBox();
+        void setVel(int);
+        void setPos(float, float);
+        void setHitBox(float, float);
+        void updateBox();
 };
