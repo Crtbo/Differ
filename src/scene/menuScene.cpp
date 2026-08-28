@@ -6,7 +6,8 @@ bool MenuScene::enter() {
     mMapHeight = 160;
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
-    player.setPlayer(32, 32);
+    player.setPos(32, 32);
+    player.setHitBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, path);
     return true;
 }
@@ -23,7 +24,7 @@ void MenuScene::handleEvent(SDL_Event &event) {
 }
 
 void MenuScene::logic() {
-    player.move();
+    player.move(mTiles);
     player.setCamera(mCamera, kScreenWidth, kScreenHeight);
 }
 

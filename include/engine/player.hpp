@@ -8,8 +8,7 @@ class Player : public Object
 {
     public:
         void handleEvent(SDL_Event &);
-        void move();
-        void setPlayer(float, float);
+        void move(std::vector <Tile> &);
         void setCamera(SDL_FRect &, int, int);
         void render(SDL_FRect &, std::vector <Tile> &, Texture &);
 };

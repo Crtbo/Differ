@@ -1,19 +1,35 @@
 #include "../../include/engine/player.hpp"
+#include "../../include/other/detect.hpp"
 
-void Player::handleEvent(SDL_Event &e)
+void Player::handleEvent(SDL_Event &event)
 {
-
+    if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
+        switch (event.key.key) {
+            case SDLK_LEFT:
+            case SDLK_A: mVel -= 1; break;
+            case SDLK_RIGHT:
+            case SDLK_D: mVel += 1; break;
+        }
+    } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
+        switch (event.key.key) {
+            case SDLK_LEFT:
+            case SDLK_A: mVel += 1; break;
+            case SDLK_RIGHT:
+            case SDLK_D: mVel -= 1; break;
+        }
+    }
 }
 
-void Player::move()
+void Player::move(std::vector <Tile> &tiles)
 {
-   
-}
+    if (!checkSurface(mHitBox, tiles))
+    {
+        mPos.y += 1;
+        updateBox();
+    }
 
-void Player::setPlayer(float x, float y)
-{
-    mPos = {x, y};
-    mVel = 3;
+    mPos.x += mVel;
+    updateBox();
 }
 
 void Player::setCamera(SDL_FRect &camera, int width, int height)
