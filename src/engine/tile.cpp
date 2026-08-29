@@ -1,5 +1,6 @@
 #include "../../include/engine/tile.hpp"
 #include "../../include/other/const.hpp"
+#include "../../include/other/detect.hpp"
 #include "../../include/other/global.hpp"
 #include <fstream>
 
