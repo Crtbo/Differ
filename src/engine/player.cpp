@@ -6,16 +6,16 @@ void Player::handleEvent(SDL_Event &event)
 {
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_LEFT:
             case SDLK_A: mVel -= 1; break;
-            case SDLK_RIGHT:
             case SDLK_D: mVel += 1; break;
+            case SDLK_SPACE: 
+                mPos.y -= 32; 
+                updateBox(); 
+                break;
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_LEFT:
             case SDLK_A: mVel += 1; break;
-            case SDLK_RIGHT:
             case SDLK_D: mVel -= 1; break;
         }
     }
@@ -63,8 +63,8 @@ void Player::setCamera(SDL_FRect &camera, int width, int height)
 
 void Player::setBox(float w, float h) {
     mHitBox.w = w;
-    mHitBox.h = h - 4;
-    mFeetBox.w = w - 2;
+    mHitBox.h = h;
+    mFeetBox.w = w;
     mFeetBox.h = 4;
     updateBox();
 }
@@ -72,6 +72,6 @@ void Player::setBox(float w, float h) {
 void Player::updateBox() {
     mHitBox.x = mPos.x;
     mHitBox.y = mPos.y;
-    mFeetBox.x = mPos.x + 1;
-    mFeetBox.y = mPos.y + mHitBox.h;
+    mFeetBox.x = mPos.x;
+    mFeetBox.y = mPos.y + mHitBox.h - 4;
 }
