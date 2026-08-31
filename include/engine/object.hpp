@@ -12,6 +12,6 @@ class Object {
         SDL_FRect getHitBox();
         void setVel(int);
         void setPos(float, float);
-        void setHitBox(float, float);
-        void updateBox();
+        virtual void setBox(float, float);
+        virtual void updateBox();
 };

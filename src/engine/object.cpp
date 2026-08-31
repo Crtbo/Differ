@@ -17,7 +17,7 @@ void Object::setPos(float x, float y) {
     mPos.y = y;
 }
 
-void Object::setHitBox(float w, float h) {
+void Object::setBox(float w, float h) {
     updateBox();
     mHitBox.w = w;
     mHitBox.h = h;
