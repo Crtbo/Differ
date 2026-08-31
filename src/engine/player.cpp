@@ -1,5 +1,6 @@
 #include "../../include/engine/player.hpp"
 #include "../../include/other/detect.hpp"
+#include "../../include/other/global.hpp"
 
 void Player::handleEvent(SDL_Event &event)
 {
@@ -22,14 +23,27 @@ void Player::handleEvent(SDL_Event &event)
 
 void Player::move(std::vector <Tile> &tiles)
 {
-    if (!checkSurface(mHitBox, tiles))
-    {
-        mPos.y += 1;
+    mPos.y += 1;
+    updateBox();
+    if (checkSurface(mFeetBox, tiles)) {
+        mPos.y -= 1;
         updateBox();
     }
 
     mPos.x += mVel;
     updateBox();
+    if (checkSurface(mHitBox, tiles)) {
+        mPos.x -= mVel;
+        updateBox();
+    }
+}
+
+void Player::render(SDL_FRect &camera, std::vector <Tile> &tiles, Texture &texture)
+{
+    texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y);
+    // SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0x00);
+    // SDL_RenderRect(gRenderer, &mHitBox);
+    // SDL_RenderRect(gRenderer, &mFeetBox);
 }
 
 void Player::setCamera(SDL_FRect &camera, int width, int height)
@@ -47,7 +61,17 @@ void Player::setCamera(SDL_FRect &camera, int width, int height)
         camera.y = height - camera.h;
 }
 
-void Player::render(SDL_FRect &camera, std::vector <Tile> &tiles, Texture &texture)
-{
-    texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y);
+void Player::setBox(float w, float h) {
+    mHitBox.w = w;
+    mHitBox.h = h - 4;
+    mFeetBox.w = w - 2;
+    mFeetBox.h = 4;
+    updateBox();
+}
+
+void Player::updateBox() {
+    mHitBox.x = mPos.x;
+    mHitBox.y = mPos.y;
+    mFeetBox.x = mPos.x + 1;
+    mFeetBox.y = mPos.y + mHitBox.h;
 }

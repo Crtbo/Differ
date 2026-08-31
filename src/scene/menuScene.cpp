@@ -7,7 +7,7 @@ bool MenuScene::enter() {
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
     player.setPos(32, 32);
-    player.setHitBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
+    player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, path);
     return true;
 }
