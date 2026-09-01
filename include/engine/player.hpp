@@ -8,11 +8,14 @@ class Player : public Object
 {
     private:
         SDL_FRect mFeetBox;
+        int g, yes;
 
     public:
+        Player();
         void handleEvent(SDL_Event &);
         void move(std::vector <Tile> &);
-        void render(SDL_FRect &, std::vector <Tile> &, Texture &);
+        void render(SDL_FRect &, Texture &);
+        bool onGround(std::vector <Tile> &);
         void setCamera(SDL_FRect &, int, int);
         void setBox(float, float) override;
         void updateBox() override;

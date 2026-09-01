@@ -2,52 +2,64 @@
 #include "../../include/other/detect.hpp"
 #include "../../include/other/global.hpp"
 
-void Player::handleEvent(SDL_Event &event)
-{
+Player::Player() {
+    g = 5;
+}
+
+void Player::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_A: mVel -= 1; break;
-            case SDLK_D: mVel += 1; break;
-            case SDLK_SPACE: 
-                mPos.y -= 32; 
-                updateBox(); 
-                break;
+            case SDLK_A: mVel.x -= 2; break;
+            case SDLK_D: mVel.x += 2; break;
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_A: mVel += 1; break;
-            case SDLK_D: mVel -= 1; break;
+            case SDLK_A: mVel.x += 2; break;
+            case SDLK_D: mVel.x -= 2; break;
         }
     }
 }
 
-void Player::move(std::vector <Tile> &tiles)
-{
-    mPos.y += 1;
-    updateBox();
-    if (checkSurface(mFeetBox, tiles)) {
-        mPos.y -= 1;
-        updateBox();
+void Player::move(std::vector <Tile> &tiles) {
+    const bool *keyStates = SDL_GetKeyboardState(NULL);
+
+    if (keyStates[SDL_SCANCODE_SPACE] && yes == 0) {
+        g = -10;
+        yes = 50;
     }
 
-    mPos.x += mVel;
+    mPos.x += mVel.x;
     updateBox();
     if (checkSurface(mHitBox, tiles)) {
-        mPos.x -= mVel;
+        mPos.x -= mVel.x;
         updateBox();
     }
+
+    mPos.y += g;
+    updateBox();
+    if (checkSurface(mFeetBox, tiles)) {
+        mPos.y -= g;
+        updateBox();
+    }
+
+    g++;
+    if (g >= 5)
+        g = 5;
+    
+    yes--;
+    if (yes <= 0)
+        yes = 0;
+
 }
 
-void Player::render(SDL_FRect &camera, std::vector <Tile> &tiles, Texture &texture)
-{
+void Player::render(SDL_FRect &camera, Texture &texture) {
     texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y);
     // SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0x00);
     // SDL_RenderRect(gRenderer, &mHitBox);
     // SDL_RenderRect(gRenderer, &mFeetBox);
 }
 
-void Player::setCamera(SDL_FRect &camera, int width, int height)
-{
+void Player::setCamera(SDL_FRect &camera, int width, int height) {
     camera.x = (int)(mPos.x / 2 - kScreenWidth / 2);
     camera.y = (int)(mPos.y / 2 - kScreenHeight / 2);
 
