@@ -7,6 +7,7 @@ bool MenuScene::enter() {
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
     player.setPos(32, 32);
+    player.setVel(0, 0);
     player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, path);
     return true;
@@ -32,7 +33,7 @@ void MenuScene::render() {
     for (int i = 0; i < mTiles.size(); i++)
         mTiles[i].render(mCamera, mTileTexture);
 
-    player.render(mCamera, mTiles, mPlayerTexture);
+    player.render(mCamera, mPlayerTexture);
 }
 
 MenuScene::MenuScene() {}

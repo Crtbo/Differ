@@ -8,13 +8,14 @@ SDL_FRect Object::getHitBox() {
     return mHitBox;
 }
 
-void Object::setVel(int vel) {
-    mVel = vel;
-}
-
 void Object::setPos(float x, float y) {
     mPos.x = x;
     mPos.y = y;
+}
+
+void Object::setVel(float x, float y) {
+    mVel.x = x;
+    mVel.y = y;
 }
 
 void Object::setBox(float w, float h) {
