@@ -2,12 +2,12 @@
 
 bool MenuScene::enter() {
     std::string path = "assets/maps/level1.map";
-    mMapWidth = 304;
+    mMapWidth = 592;
     mMapHeight = 160;
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
     player.setPos(32, 32);
-    player.setVel(0, 0);
+    player.setVel(0, 5);
     player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, path);
     return true;
@@ -26,7 +26,7 @@ void MenuScene::handleEvent(SDL_Event &event) {
 
 void MenuScene::logic() {
     player.move(mTiles);
-    player.setCamera(mCamera, kScreenWidth, kScreenHeight);
+    player.setCamera(mCamera, mMapWidth, mMapHeight);
 }
 
 void MenuScene::render() {
