@@ -16,11 +16,11 @@ bool checkCollision(SDL_FRect a, SDL_FRect b)
     return true;
 }
 
-bool checkSurface(SDL_FRect box, std::vector <Tile> &tiles)
+int checkSurface(SDL_FRect box, std::vector <Tile> &tiles)
 {
     for (int i = 0; i < tiles.size(); i++)
         if (tiles[i].getType() == kTileLand)
             if (checkCollision(box, tiles[i].getBox()))
-                return true;
-    return false;
+                return i;
+    return -1;
 }

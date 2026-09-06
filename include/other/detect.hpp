@@ -4,4 +4,4 @@
 #include <vector>
 
 bool checkCollision(SDL_FRect, SDL_FRect);
-bool checkSurface(SDL_FRect, std::vector <Tile> &);
+int checkSurface(SDL_FRect, std::vector <Tile> &);
