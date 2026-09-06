@@ -9,7 +9,6 @@ Player::Player() {
 
 void Player::handleEvent(SDL_Event &event) {
     const bool *keyStates = SDL_GetKeyboardState(NULL);
-    mSpeed = keyStates[SDL_SCANCODE_R] == true ? 4 : 2;
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
@@ -30,23 +29,30 @@ void Player::handleEvent(SDL_Event &event) {
 }
 
 void Player::move(std::vector <Tile> &tiles) {
+    int tileInd;
+
     mPos.x += mVel.x;
     updateBox();
-    if (checkSurface(mHitBox, tiles)) {
-        mPos.x -= mVel.x;
+    tileInd = checkSurface(mHitBox, tiles);
+    if (tileInd != -1) {
+        if (tiles[tileInd].getBox().x < mHitBox.x)
+            mPos.x = tiles[tileInd].getBox().x + tiles[tileInd].getBox().w;
+        else
+            mPos.x = tiles[tileInd].getBox().x - mHitBox.w;
         updateBox();
     }
 
     mPos.y += mVel.y;
     updateBox();
-    if (checkSurface(mFeetBox, tiles)) {
+    tileInd = checkSurface(mFeetBox, tiles);
+    if (tileInd != -1) {
         mGrounded = true;
-        mPos.y -= mVel.y;
+        mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
         updateBox();
     }
 
     mVel.y++;
-    if (mVel.y >= 5) mVel.y = 5;
+    if (mVel.y >= 4) mVel.y = 4;
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
