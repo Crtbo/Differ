@@ -3,10 +3,10 @@
 bool MenuScene::enter() {
     std::string path = "assets/maps/level1.map";
     mMapWidth = 592;
-    mMapHeight = 160;
+    mMapHeight = 288;
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
-    player.setPos(32, 32);
+    player.setPos(32, 0);
     player.setVel(0, 5);
     player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, path);
