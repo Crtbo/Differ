@@ -4,20 +4,21 @@
 
 Player::Player() {
     mGrounded = false;
-    mSpeed = 2;
+    mSpeed = 1;
 }
 
 void Player::handleEvent(SDL_Event &event) {
     const bool *keyStates = SDL_GetKeyboardState(NULL);
+    mSpeed = keyStates[SDL_SCANCODE_LSHIFT] == true ? 2 : 1;
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_A: mVel.x -= mSpeed; break;
-            case SDLK_D: mVel.x += mSpeed; break;
+            case SDLK_A: mVel.x -= 2; break;
+            case SDLK_D: mVel.x += 2; break;
             case SDLK_SPACE:
                 if (mGrounded) {
                     mGrounded = false;
-                    mVel.y = -10;
+                    mVel.y = -11;
                 }
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
@@ -34,8 +35,8 @@ void Player::handleEvent(SDL_Event &event) {
 void Player::move(std::vector <Tile> &tiles) {
     int tileInd;
     mGrounded = false;
-
-    mPos.x += mVel.x;
+    
+    mPos.x += mVel.x * mSpeed;
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
@@ -52,14 +53,14 @@ void Player::move(std::vector <Tile> &tiles) {
     if (tileInd != -1) {
         mGrounded = true;
         if (tiles[tileInd].getBox().y > mHitBox.y)
-        mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
+            mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
         else {
             mPos.y = tiles[tileInd].getBox().y + tiles[tileInd].getBox().h;
             mVel.y = 0;   
         }
         updateBox();
     }
-
+    
     mVel.y++;
     if (mVel.y >= 5) mVel.y = 5;
     SDL_Log("%d", mSpeed);
