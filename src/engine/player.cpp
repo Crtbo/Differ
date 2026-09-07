@@ -22,14 +22,18 @@ void Player::handleEvent(SDL_Event &event) {
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_A: mVel.x += mSpeed; break;
-            case SDLK_D: mVel.x -= mSpeed; break;
+            case SDLK_A: mVel.x += 2; break;
+            case SDLK_D: mVel.x -= 2; break;
+            case SDLK_SPACE:
+                if (!mGrounded)
+                    mVel.y = 5;
         }
     }
 }
 
 void Player::move(std::vector <Tile> &tiles) {
     int tileInd;
+    mGrounded = false;
 
     mPos.x += mVel.x;
     updateBox();
@@ -44,15 +48,21 @@ void Player::move(std::vector <Tile> &tiles) {
 
     mPos.y += mVel.y;
     updateBox();
-    tileInd = checkSurface(mFeetBox, tiles);
+    tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mGrounded = true;
+        if (tiles[tileInd].getBox().y > mHitBox.y)
         mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
+        else {
+            mPos.y = tiles[tileInd].getBox().y + tiles[tileInd].getBox().h;
+            mVel.y = 0;   
+        }
         updateBox();
     }
 
     mVel.y++;
-    if (mVel.y >= 4) mVel.y = 4;
+    if (mVel.y >= 5) mVel.y = 5;
+    SDL_Log("%d", mSpeed);
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
