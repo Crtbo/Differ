@@ -10,6 +10,7 @@ class Player : public Object
         SDL_FRect mFeetBox;
         int mSpeed;
         bool mGrounded;
+        bool mSliding;
 
     public:
         Player();

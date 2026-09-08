@@ -3,8 +3,9 @@
 #include "../../include/other/global.hpp"
 
 Player::Player() {
-    mGrounded = false;
     mSpeed = 1;
+    mGrounded = false;
+    mSliding = false;
 }
 
 void Player::handleEvent(SDL_Event &event) {
@@ -13,8 +14,8 @@ void Player::handleEvent(SDL_Event &event) {
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_A: mVel.x -= 2; break;
-            case SDLK_D: mVel.x += 2; break;
+            case SDLK_LEFT: mVel.x -= 2; break;
+            case SDLK_RIGHT: mVel.x += 2; break;
             case SDLK_SPACE:
                 if (mGrounded) {
                     mGrounded = false;
@@ -23,8 +24,8 @@ void Player::handleEvent(SDL_Event &event) {
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_A: mVel.x += 2; break;
-            case SDLK_D: mVel.x -= 2; break;
+            case SDLK_LEFT: mVel.x += 2; break;
+            case SDLK_RIGHT: mVel.x -= 2; break;
             case SDLK_SPACE:
                 if (!mGrounded)
                     mVel.y = 5;
@@ -35,6 +36,7 @@ void Player::handleEvent(SDL_Event &event) {
 void Player::move(std::vector <Tile> &tiles) {
     int tileInd;
     mGrounded = false;
+    mSliding = false;
     
     mPos.x += mVel.x * mSpeed;
     updateBox();
@@ -45,6 +47,7 @@ void Player::move(std::vector <Tile> &tiles) {
         else
             mPos.x = tiles[tileInd].getBox().x - mHitBox.w;
         updateBox();
+        mSliding = true;
     }
 
     mPos.y += mVel.y;
@@ -63,7 +66,7 @@ void Player::move(std::vector <Tile> &tiles) {
     
     mVel.y++;
     if (mVel.y >= 5) mVel.y = 5;
-    SDL_Log("%d", mSpeed);
+    SDL_Log("%d", mSliding);
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
