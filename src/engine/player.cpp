@@ -6,6 +6,7 @@ Player::Player() {
     mSpeed = 1;
     mGrounded = false;
     mSliding = false;
+    mPushBack = 0;
 }
 
 void Player::handleEvent(SDL_Event &event) {
@@ -19,6 +20,10 @@ void Player::handleEvent(SDL_Event &event) {
             case SDLK_SPACE:
                 if (mGrounded) {
                     mGrounded = false;
+                    mVel.y = -11;
+                } else if (mSliding) {
+                    mPushBack = keyStates[SDL_SCANCODE_LEFT] ? 6 : -6;
+                    mVel.x = mPushBack;
                     mVel.y = -11;
                 }
         }
@@ -42,6 +47,7 @@ void Player::move(std::vector <Tile> &tiles) {
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
+        mSliding = true;
         if (tiles[tileInd].getBox().x < mHitBox.x)
             mPos.x = tiles[tileInd].getBox().x + tiles[tileInd].getBox().w;
         else
@@ -65,8 +71,19 @@ void Player::move(std::vector <Tile> &tiles) {
     }
     
     mVel.y++;
-    if (mVel.y >= 5) mVel.y = 5;
-    SDL_Log("%d", mSliding);
+    if (mVel.y >= 5 && !mSliding) 
+        mVel.y = 5;
+    else if (mVel.y >= 2 && mSliding) {
+        mVel.y = 2;
+    }
+
+    if (mPushBack < 0) {
+        mPushBack += 2;
+        mVel.x += 3;
+    } else if (mPushBack > 0) {
+        mPushBack -= 2;
+        mVel.x -= 3;
+    }
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
