@@ -3,20 +3,19 @@
 #include "../../include/other/global.hpp"
 
 Player::Player() {
-    mSpeed = 1;
+    mModifier = 1;
     mGrounded = false;
     mSliding = false;
     mPushBack = 0;
 }
 
 void Player::handleEvent(SDL_Event &event) {
-    const bool *keyStates = SDL_GetKeyboardState(NULL);
-    mSpeed = keyStates[SDL_SCANCODE_LSHIFT] == true ? 2 : 1;
+    const bool *keyStates = SDL_GetKeyboardState(nullptr);
+    mModifier = keyStates[SDL_SCANCODE_LSHIFT] ? 2 : 1;
+    mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -2 : keyStates[SDL_SCANCODE_RIGHT] ? 2 : 0;
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_LEFT: mVel.x -= 2; break;
-            case SDLK_RIGHT: mVel.x += 2; break;
             case SDLK_SPACE:
                 if (mGrounded) {
                     mGrounded = false;
@@ -29,8 +28,6 @@ void Player::handleEvent(SDL_Event &event) {
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
-            case SDLK_LEFT: mVel.x += 2; break;
-            case SDLK_RIGHT: mVel.x -= 2; break;
             case SDLK_SPACE:
                 if (!mGrounded)
                     mVel.y = 5;
@@ -43,7 +40,7 @@ void Player::move(std::vector <Tile> &tiles) {
     mGrounded = false;
     mSliding = false;
     
-    mPos.x += mVel.x * mSpeed;
+    mPos.x += mVel.x * mModifier;
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
@@ -53,7 +50,6 @@ void Player::move(std::vector <Tile> &tiles) {
         else
             mPos.x = tiles[tileInd].getBox().x - mHitBox.w;
         updateBox();
-        mSliding = true;
     }
 
     mPos.y += mVel.y;

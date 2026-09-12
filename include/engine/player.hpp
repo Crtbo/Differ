@@ -8,7 +8,8 @@ class Player : public Object
 {
     private:
         SDL_FRect mFeetBox;
-        int mSpeed;
+        int mModifier;
+        int mPushBack;
         bool mGrounded;
         bool mSliding;
 
