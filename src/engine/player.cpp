@@ -7,6 +7,7 @@ Player::Player() {
     mGrounded = false;
     mSliding = false;
     mPushBack = 0;
+    mCoyote = 7;
 }
 
 void Player::handleEvent(SDL_Event &event) {
@@ -17,7 +18,8 @@ void Player::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
             case SDLK_SPACE:
-                if (mGrounded) {
+                if (mGrounded || mCoyote) {
+                    mCoyote = 0;
                     mGrounded = false;
                     mVel.y = -11;
                 } else if (mSliding) {
@@ -40,6 +42,9 @@ void Player::move(std::vector <Tile> &tiles) {
     mGrounded = false;
     mSliding = false;
     
+    if (mCoyote > 0)
+        mCoyote--;
+
     mPos.x += mVel.x * mModifier;
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
@@ -57,6 +62,7 @@ void Player::move(std::vector <Tile> &tiles) {
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mGrounded = true;
+        mCoyote = 7;
         if (tiles[tileInd].getBox().y > mHitBox.y)
             mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
         else {
@@ -66,12 +72,12 @@ void Player::move(std::vector <Tile> &tiles) {
         updateBox();
     }
     
+    
     mVel.y++;
     if (mVel.y >= 5 && !mSliding) 
         mVel.y = 5;
-    else if (mVel.y >= 2 && mSliding) {
+    else if (mVel.y >= 2 && mSliding)
         mVel.y = 2;
-    }
 
     if (mPushBack < 0) {
         mPushBack += 2;
@@ -80,6 +86,8 @@ void Player::move(std::vector <Tile> &tiles) {
         mPushBack -= 2;
         mVel.x -= 3;
     }
+    
+    SDL_Log("mCoyote: %d", mCoyote);
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {

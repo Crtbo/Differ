@@ -12,6 +12,7 @@ class Player : public Object
         int mPushBack;
         bool mGrounded;
         bool mSliding;
+        int mCoyote;
 
     public:
         Player();
