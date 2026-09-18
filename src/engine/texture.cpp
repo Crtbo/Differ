@@ -22,6 +22,7 @@ bool Texture::loadFromFile(std::string path) {
             else {
                 mWidth = loadedSurface->w;
                 mHeight = loadedSurface->h;
+                SDL_SetTextureScaleMode(mTexture, SDL_SCALEMODE_NEAREST);
             }
         }
 
