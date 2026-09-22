@@ -20,6 +20,9 @@ int main() {
     SDL_Event event;
     SDL_zero(event);
     Timer capTimer;
+
+    Uint64 last_tick = 0;
+    Uint64 current_tick = 0;
     
     gCurrentScene = MenuScene::get();
     if (gCurrentScene->enter() == false) {
@@ -37,6 +40,9 @@ int main() {
                 setNextScene(ExitScene::get());
         }
 
+        last_tick = current_tick;
+        current_tick = SDL_GetTicks();
+        delta_time = (current_tick - last_tick) / 1000.0f;
         gCurrentScene->logic();
 
         if (changeScene() == false) {
