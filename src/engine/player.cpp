@@ -13,7 +13,7 @@ Player::Player() {
 void Player::handleEvent(SDL_Event &event) {
     const bool *keyStates = SDL_GetKeyboardState(nullptr);
     mModifier = keyStates[SDL_SCANCODE_LSHIFT] ? 2 : 1;
-    mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -2 : keyStates[SDL_SCANCODE_RIGHT] ? 2 : 0;
+    mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -50 : keyStates[SDL_SCANCODE_RIGHT] ? 50 : 0;
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
@@ -21,18 +21,18 @@ void Player::handleEvent(SDL_Event &event) {
                 if (mGrounded || mCoyote) {
                     mCoyote = 0;
                     mGrounded = false;
-                    mVel.y = -11;
+                    mVel.y = -100;
                 } else if (mSliding) {
-                    mPushBack = keyStates[SDL_SCANCODE_LEFT] ? 6 : -6;
+                    mPushBack = keyStates[SDL_SCANCODE_LEFT] ? 10 : -10;
                     mVel.x = mPushBack;
-                    mVel.y = -11;
+                    mVel.y = -100;
                 }
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
             case SDLK_SPACE:
                 if (!mGrounded)
-                    mVel.y = 5;
+                    mVel.y = 50;
         }
     }
 }
@@ -45,7 +45,7 @@ void Player::move(std::vector <Tile> &tiles) {
     if (mCoyote > 0)
         mCoyote--;
 
-    mPos.x += mVel.x * mModifier;
+    mPos.x += mVel.x * mModifier * delta_time;
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
@@ -57,7 +57,7 @@ void Player::move(std::vector <Tile> &tiles) {
         updateBox();
     }
 
-    mPos.y += mVel.y;
+    mPos.y += mVel.y * delta_time;
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
@@ -73,18 +73,18 @@ void Player::move(std::vector <Tile> &tiles) {
     }
     
     
-    mVel.y++;
-    if (mVel.y >= 5 && !mSliding) 
-        mVel.y = 5;
-    else if (mVel.y >= 2 && mSliding)
-        mVel.y = 2;
+    mVel.y += 2;
+    if (mVel.y >= 200 && !mSliding) 
+        mVel.y = 200;
+    else if (mVel.y >= 100 && mSliding)
+        mVel.y = 100;
 
     if (mPushBack < 0) {
-        mPushBack += 2;
-        mVel.x += 3;
+        mPushBack += 1;
+        mVel.x += 10;
     } else if (mPushBack > 0) {
-        mPushBack -= 2;
-        mVel.x -= 3;
+        mPushBack -= 1;
+        mVel.x -= 10;
     }
     
     SDL_Log("mCoyote: %d", mCoyote);
