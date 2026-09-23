@@ -21,11 +21,11 @@ void Player::handleEvent(SDL_Event &event) {
                 if (mGrounded || mCoyote) {
                     mCoyote = 0;
                     mGrounded = false;
-                    mVel.y = -100;
+                    mVel.y = -200;
                 } else if (mSliding) {
                     mPushBack = keyStates[SDL_SCANCODE_LEFT] ? 10 : -10;
                     mVel.x = mPushBack;
-                    mVel.y = -100;
+                    mVel.y = -200;
                 }
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
@@ -73,9 +73,9 @@ void Player::move(std::vector <Tile> &tiles) {
     }
     
     
-    mVel.y += 2;
+    mVel.y += 10;
     if (mVel.y >= 200 && !mSliding) 
-        mVel.y = 200;
+        mVel.y = 100;
     else if (mVel.y >= 100 && mSliding)
         mVel.y = 100;
 
