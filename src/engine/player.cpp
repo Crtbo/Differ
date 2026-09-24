@@ -13,7 +13,7 @@ Player::Player() {
 void Player::handleEvent(SDL_Event &event) {
     const bool *keyStates = SDL_GetKeyboardState(nullptr);
     mModifier = keyStates[SDL_SCANCODE_LSHIFT] ? 2 : 1;
-    mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -50 : keyStates[SDL_SCANCODE_RIGHT] ? 50 : 0;
+    mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -100 : keyStates[SDL_SCANCODE_RIGHT] ? 100 : 0;
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
@@ -87,6 +87,7 @@ void Player::move(std::vector <Tile> &tiles) {
         mVel.x -= 10;
     }
     
+    SDL_Log("mCoyote: %d", mCoyote);
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
