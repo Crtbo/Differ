@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 
-class Object {
+class Entity {
     protected:
         SDL_FPoint mPos;
         SDL_FPoint mVel;
