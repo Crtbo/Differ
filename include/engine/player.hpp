@@ -1,10 +1,10 @@
 #pragma once
-#include "object.hpp"
+#include "entity.hpp"
 #include "tile.hpp"
 #include "../other/const.hpp"
 #include <vector>
 
-class Player : public Object
+class Player : public Entity
 {
     private:
         SDL_FRect mFeetBox;
