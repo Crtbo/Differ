@@ -86,8 +86,6 @@ void Player::move(std::vector <Tile> &tiles) {
         mPushBack -= 1;
         mVel.x -= 10;
     }
-    
-    SDL_Log("mCoyote: %d", mCoyote);
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
