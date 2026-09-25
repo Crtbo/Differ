@@ -43,6 +43,10 @@ int main() {
         last_tick = current_tick;
         current_tick = SDL_GetTicks();
         delta_time = (current_tick - last_tick) / 1000.0f;
+
+        if (delta_time > (float)1 / 30)
+            delta_time = (float)1 / 30;
+        SDL_Log("%f", delta_time);
         gCurrentScene->logic();
 
         if (changeScene() == false) {
