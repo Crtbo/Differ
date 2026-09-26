@@ -45,7 +45,7 @@ void Player::move(std::vector <Tile> &tiles) {
     if (mCoyote > 0)
         mCoyote--;
 
-    mPos.x += mVel.x * mModifier * delta_time;
+    mPos.x += mVel.x * mModifier * gDeltaTime;
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
@@ -57,7 +57,7 @@ void Player::move(std::vector <Tile> &tiles) {
         updateBox();
     }
 
-    mPos.y += mVel.y * delta_time;
+    mPos.y += mVel.y * gDeltaTime;
     updateBox();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {

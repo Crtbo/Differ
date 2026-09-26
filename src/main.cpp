@@ -21,8 +21,8 @@ int main() {
     SDL_zero(event);
     Timer capTimer;
 
-    Uint64 last_tick = 0;
-    Uint64 current_tick = 0;
+    Uint64 lastTick = 0;
+    Uint64 currentTick = 0;
     
     gCurrentScene = MenuScene::get();
     if (gCurrentScene->enter() == false) {
@@ -40,13 +40,13 @@ int main() {
                 setNextScene(ExitScene::get());
         }
 
-        last_tick = current_tick;
-        current_tick = SDL_GetTicks();
-        delta_time = (current_tick - last_tick) / 1000.0f;
+        lastTick = currentTick;
+        currentTick = SDL_GetTicks();
+        gDeltaTime = (currentTick - lastTick) / 1000.0f;
 
-        if (delta_time > (float)1 / 30)
-            delta_time = (float)1 / 30;
-        SDL_Log("%f", delta_time);
+        if (gDeltaTime > (float)1 / 30)
+            gDeltaTime = (float)1 / 30;
+        
         gCurrentScene->logic();
 
         if (changeScene() == false) {
