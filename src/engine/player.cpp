@@ -13,7 +13,8 @@ Player::Player() {
 void Player::handleEvent(SDL_Event &event) {
     const bool *keyStates = SDL_GetKeyboardState(nullptr);
     mModifier = keyStates[SDL_SCANCODE_LSHIFT] ? 2 : 1;
-    mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -100 : keyStates[SDL_SCANCODE_RIGHT] ? 100 : 0;
+    if (!mPushBack)
+        mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -100 : keyStates[SDL_SCANCODE_RIGHT] ? 100 : 0;
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
@@ -23,8 +24,8 @@ void Player::handleEvent(SDL_Event &event) {
                     mGrounded = false;
                     mVel.y = -200;
                 } else if (mSliding) {
-                    mPushBack = keyStates[SDL_SCANCODE_LEFT] ? 10 : -10;
-                    mVel.x = mPushBack;
+                    mPushBack = 10;
+                    mVel.x = keyStates[SDL_SCANCODE_LEFT] ? 100 : -100;
                     mVel.y = -200;
                 }
         }
@@ -79,13 +80,11 @@ void Player::move(std::vector <Tile> &tiles) {
     else if (mVel.y >= 100 && mSliding)
         mVel.y = 100;
 
-    if (mPushBack < 0) {
-        mPushBack += 1;
-        mVel.x += 10;
-    } else if (mPushBack > 0) {
-        mPushBack -= 1;
-        mVel.x -= 10;
+    if (mPushBack) {
+        mPushBack--;
+        mVel.x = mVel.x > 0 ? mVel.x - 10 : mVel.x + 10;
     }
+        
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
