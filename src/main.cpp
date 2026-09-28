@@ -42,10 +42,10 @@ int main() {
 
         lastTick = currentTick;
         currentTick = SDL_GetTicks();
-        gDeltaTime = (currentTick - lastTick) / 1000.0f;
+        gDeltaTime = (currentTick - lastTick) / 1000.f;
 
-        if (gDeltaTime > (float)1 / 30)
-            gDeltaTime = (float)1 / 30;
+        if (gDeltaTime > 1.f / 30)
+            gDeltaTime = 1.f / 30;
         
         gCurrentScene->logic();
 
