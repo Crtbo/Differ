@@ -13,6 +13,7 @@ int main() {
     SDL_Init(SDL_INIT_VIDEO);
     SDL_CreateWindowAndRenderer("unnamed game", kScreenWidth * 5, kScreenHeight * 5, 0, &gWindow, &gRenderer);
     SDL_SetRenderLogicalPresentation(gRenderer, kScreenWidth, kScreenHeight, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    SDL_SetRenderVSync(gRenderer, 1);
     TTF_Init();
     std::string fontPath{"assets/fonts/PixelOperator-Bold.ttf"};
     gMainFont = TTF_OpenFont(fontPath.c_str(), 27);
