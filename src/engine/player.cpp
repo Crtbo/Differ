@@ -73,7 +73,6 @@ void Player::move(std::vector <Tile> &tiles) {
         updateBox();
     }
     
-    
     mVel.y += 10;
     if (mVel.y >= 200 && !mSliding) 
         mVel.y = 100;
@@ -84,7 +83,6 @@ void Player::move(std::vector <Tile> &tiles) {
         mPushBack--;
         mVel.x = mVel.x > 0 ? mVel.x - 10 : mVel.x + 10;
     }
-        
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
