@@ -14,6 +14,12 @@ class Player : public Entity
         bool mSliding;
         int mCoyote;
 
+        const int kJump = -200;
+        const int kTime = 7;
+        const int kGravity = 10;
+        const int kMaxPull = 200;
+        const int kSpeed = 100;
+
     public:
         Player();
         void handleEvent(SDL_Event &);

@@ -7,33 +7,33 @@ Player::Player() {
     mGrounded = false;
     mSliding = false;
     mPushBack = 0;
-    mCoyote = 7;
+    mCoyote = kTime;
 }
 
 void Player::handleEvent(SDL_Event &event) {
     const bool *keyStates = SDL_GetKeyboardState(nullptr);
     mModifier = keyStates[SDL_SCANCODE_LSHIFT] ? 2 : 1;
     if (!mPushBack)
-        mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -100 : keyStates[SDL_SCANCODE_RIGHT] ? 100 : 0;
+        mVel.x = keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT] ? 0 : keyStates[SDL_SCANCODE_LEFT] ? -kSpeed : keyStates[SDL_SCANCODE_RIGHT] ? kSpeed : 0;
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
             case SDLK_SPACE:
                 if (mGrounded || mCoyote) {
-                    mCoyote = 0;
+                    mCoyote = kTime - kTime;
                     mGrounded = false;
-                    mVel.y = -200;
+                    mVel.y = kJump;
                 } else if (mSliding) {
-                    mPushBack = 10;
-                    mVel.x = keyStates[SDL_SCANCODE_LEFT] ? 100 : -100;
-                    mVel.y = -200;
+                    mPushBack = kGravity;
+                    mVel.x = keyStates[SDL_SCANCODE_LEFT] ? -kJump / 2 : kJump / 2;
+                    mVel.y = kJump;
                 }
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
             case SDLK_SPACE:
-                if (!mGrounded)
-                    mVel.y = 50;
+                if (!mGrounded && mVel.y <= 0)
+                    mVel.y = -kGravity;
         }
     }
 }
@@ -63,7 +63,7 @@ void Player::move(std::vector <Tile> &tiles) {
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mGrounded = true;
-        mCoyote = 7;
+        mCoyote = kTime;
         if (tiles[tileInd].getBox().y > mHitBox.y)
             mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
         else {
@@ -73,15 +73,15 @@ void Player::move(std::vector <Tile> &tiles) {
         updateBox();
     }
     
-    mVel.y += 10;
-    if (mVel.y >= 200 && !mSliding) 
-        mVel.y = 100;
-    else if (mVel.y >= 100 && mSliding)
-        mVel.y = 100;
+    mVel.y += kGravity;
+    if (mVel.y >= kMaxPull && !mSliding) 
+        mVel.y = kMaxPull;
+    else if (mVel.y >= kMaxPull / 2 && mSliding)
+        mVel.y = kMaxPull / 2;
 
     if (mPushBack) {
         mPushBack--;
-        mVel.x = mVel.x > 0 ? mVel.x - 10 : mVel.x + 10;
+        mVel.x = mVel.x > 0 ? mVel.x - kGravity : mVel.x + kGravity;
     }
 }
 
