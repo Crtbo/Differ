@@ -27,18 +27,16 @@ SDL_FRect Tile::getBox() {
 
 void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path)
 {
+    std::ifstream map(path);
     tiles.clear();
     int x = 0, y = 0;
-    std::ifstream map(path);
-
     int tileType;
-    while (map >> tileType)
-    {
+    
+    while (map >> tileType) {
         tiles.emplace_back(x, y, tileType);
 
         x += kTileWidth;
-        if (x >= mapWidth)
-        {
+        if (x >= mapWidth) {
             x = 0;
             y += kTileHeight;
         }
