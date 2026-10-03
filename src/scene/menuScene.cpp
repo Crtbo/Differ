@@ -1,4 +1,5 @@
 #include "../../include/scene/menuScene.hpp"
+#include "../../include/scene/editScene.hpp"
 
 bool MenuScene::enter() {
     std::string path = "assets/maps/level1.map";
