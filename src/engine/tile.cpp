@@ -50,12 +50,16 @@ void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path) {
     map.close();
 }
 
-void saveTiles(std::vector <Tile> tiles, std::string path) {
+void saveTiles(std::vector <Tile> tiles, int mapWidth, std::string path) {
     std::ofstream map(path);
 
-    for (int i = 0; i < tiles.size(); i++)
+    for (int i = 0; i < tiles.size(); i++) {
         map << tiles[i].getType() << " ";
-    
+
+        if ((i + 1) % (mapWidth / kTileWidth) == 0)
+            map << '\n';
+    }
+        
     map.close();
 }
 
