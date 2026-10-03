@@ -14,6 +14,7 @@ class Tile {
         void render(SDL_FRect &, Texture &);
         int getType();
         SDL_FRect getBox();
+        void setType(int);
 };
 
 void setTiles(std::vector <Tile> &, int, std::string);

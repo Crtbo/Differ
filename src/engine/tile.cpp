@@ -25,6 +25,10 @@ SDL_FRect Tile::getBox() {
     return mBox;
 }
 
+void Tile::setType(int type) {
+    mType = type;
+}
+
 void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path) {
     std::ifstream map(path);
     tiles.clear();
