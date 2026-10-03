@@ -19,4 +19,4 @@ class Tile {
 
 void setTiles(std::vector <Tile> &, int, std::string);
 void saveTiles(std::vector <Tile>, std::string);
-void placeTile(std::vector <Tile> &, SDL_Point, SDL_Rect, int);
+void placeTile(std::vector <Tile> &, SDL_Point, SDL_FRect, int);

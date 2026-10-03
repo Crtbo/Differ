@@ -59,8 +59,8 @@ void saveTiles(std::vector <Tile> tiles, std::string path) {
     map.close();
 }
 
-void placeTile(std::vector <Tile> &tiles, SDL_Point cursor, SDL_Rect camera, int tileType) {
-    SDL_Rect box = {cursor.x + camera.x, cursor.y + camera.y, 0, 0};
+void placeTile(std::vector <Tile> &tiles, SDL_Point cursor, SDL_FRect camera, int tileType) {
+    SDL_FRect box = {cursor.x + camera.x, cursor.y + camera.y, 0, 0};
 
     for (int i = 0; i < tiles.size(); i++)
         if (checkCollision(box, tiles[i].getBox())) {
