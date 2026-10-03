@@ -8,8 +8,7 @@
 
 class MenuScene : public Scene {
     private:
-        int mMapWidth;
-        int mMapHeight;
+        int mMapWidth, mMapHeight;
         Texture mPlayerTexture;
         Texture mTileTexture;
         Player player;
