@@ -22,6 +22,9 @@ bool MenuScene::exit() {
 
 void MenuScene::handleEvent(SDL_Event &event) {
     player.handleEvent(event);
+
+    if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_E)
+        setNextScene(EditScene::get());
 }
 
 void MenuScene::logic() {
