@@ -25,8 +25,7 @@ SDL_FRect Tile::getBox() {
     return mBox;
 }
 
-void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path)
-{
+void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path) {
     std::ifstream map(path);
     tiles.clear();
     int x = 0, y = 0;
@@ -44,5 +43,14 @@ void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path)
 
     gTileClips[kTileAir] = {0, 0, kTileWidth, kTileHeight};
     gTileClips[kTileLand] = {kTileWidth, 0, kTileWidth, kTileHeight};  
+    map.close();
+}
+
+void saveTiles(std::vector <Tile> &tiles, int mapSize, std::string path) {
+    std::ofstream map(path);
+
+    for (int i = 0; i < mapSize; i++)
+        map << tiles[i].getType() << " ";
+    
     map.close();
 }
