@@ -1,7 +1,7 @@
 #include "../../include/scene/editScene.hpp"
 
 bool EditScene::enter() {
-    std::string path = "assets/maps/level1.map";
+    std::string path = "assets/maps/test.map";
     mMapWidth = 976;
     mMapHeight = 320;
     mTileTexture.loadFromFile("assets/images/tiles.png");

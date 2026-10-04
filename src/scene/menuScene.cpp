@@ -2,7 +2,7 @@
 #include "../../include/scene/editScene.hpp"
 
 bool MenuScene::enter() {
-    std::string path = "assets/maps/level1.map";
+    std::string path = "assets/maps/test.map";
     mMapWidth = 976;
     mMapHeight = 320;
     mPlayerTexture.loadFromFile("assets/images/player.png");
