@@ -31,12 +31,18 @@ void EditScene::handleEvent(SDL_Event &event) {
             if (mCurrentTileType > kTileLand)
                 mCurrentTileType = kTileAir;    
         }
-    else if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
-        placeTile(mTiles, mCursor, mCamera, mCurrentTileType);
+    
+    if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_LEFT)
+        mPlacing = true; 
+    if (event.type == SDL_EVENT_MOUSE_BUTTON_UP && event.button.button == SDL_BUTTON_LEFT)
+        mPlacing = false;
 }
 
 void EditScene::logic() {
-    if (mCursor.x < kScreenWidth / 4)
+    if (mPlacing)
+        placeTile(mTiles, mCursor, mCamera, mCurrentTileType);
+
+    if (mCursor.x < kScreenWidth / 8)
 		mCamera.x -= kCursorVelocity;
 	if (mCursor.x > kScreenWidth * 3 / 4)
 		mCamera.x += kCursorVelocity;
