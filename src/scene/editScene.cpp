@@ -4,6 +4,8 @@ bool EditScene::enter() {
     std::string path = "assets/maps/test.map";
     mMapWidth = 976;
     mMapHeight = 320;
+    mCurrentTileType = kTileAir;
+    mPlacing = false;
     mTileTexture.loadFromFile("assets/images/tiles.png");
     mCursorTexture.loadFromFile("assets/images/cursor.png");
     setTiles(mTiles, mMapWidth, path);
@@ -14,6 +16,7 @@ bool EditScene::exit() {
     saveTiles(mTiles, mMapWidth, "assets/maps/test.map");
     mTiles.clear();
     mTileTexture.destroy();
+    mCursorTexture.destroy();
     return true;
 }
 
@@ -44,11 +47,11 @@ void EditScene::logic() {
 
     if (mCursor.x < kScreenWidth / 8)
 		mCamera.x -= kCursorVelocity;
-	if (mCursor.x > kScreenWidth * 3 / 4)
+	if (mCursor.x > kScreenWidth * 6 / 8)
 		mCamera.x += kCursorVelocity;
-	if (mCursor.y < kScreenHeight / 4)
+	if (mCursor.y < kScreenHeight / 8)
 		mCamera.y -= kCursorVelocity;
-	if (mCursor.y > kScreenHeight * 3 / 4)
+	if (mCursor.y > kScreenHeight * 6 / 8)
 		mCamera.y += kCursorVelocity;
 
     if (mCamera.x < 0)

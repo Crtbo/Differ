@@ -8,7 +8,8 @@
 class EditScene : public Scene {
     private:
         int mMapWidth, mMapHeight;
-        int mCurrentTileType = kTileAir;
+        int mCurrentTileType;
+        bool mPlacing;
         Texture mTileTexture;
         Texture mCursorTexture;
         std::vector <Tile> mTiles;
