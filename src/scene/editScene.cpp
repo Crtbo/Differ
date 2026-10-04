@@ -48,7 +48,7 @@ void EditScene::logic() {
         mCamera.x = 0;
     if (mCamera.y < 0)
         mCamera.y = 0;
-    if (mCamera.x > mMapWidth)
+    if (mCamera.x > mMapWidth - mCamera.w)
         mCamera.x = mMapWidth - mCamera.w;
     if (mCamera.y > mMapHeight - mCamera.h)
         mCamera.y = mMapHeight - mCamera.h;
