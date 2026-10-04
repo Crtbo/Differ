@@ -5,6 +5,7 @@ bool EditScene::enter() {
     mMapWidth = 976;
     mMapHeight = 320;
     mTileTexture.loadFromFile("assets/images/tiles.png");
+    mCursorTexture.loadFromFile("assets/images/cursor.png");
     setTiles(mTiles, mMapWidth, path);
     return true;
 }
@@ -58,7 +59,7 @@ void EditScene::render() {
     for (int i = 0; i < mTiles.size(); i++)
         mTiles[i].render(mCamera, mTileTexture);
     
-    mTileTexture.render(mCursor.x - mTileTexture.getWidth() / 2, mCursor.y - mTileTexture.getHeight() / 2);
+    mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2);
 }
 
 EditScene::EditScene() {}
