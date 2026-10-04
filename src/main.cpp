@@ -15,6 +15,7 @@ int main() {
     SDL_SetRenderLogicalPresentation(gRenderer, kScreenWidth, kScreenHeight, SDL_LOGICAL_PRESENTATION_LETTERBOX);
     SDL_SetRenderVSync(gRenderer, 1);
     TTF_Init();
+    SDL_HideCursor();
     std::string fontPath{"assets/fonts/PixelOperator-Bold.ttf"};
     gMainFont = TTF_OpenFont(fontPath.c_str(), 27);
     gTitleFont = TTF_OpenFont(fontPath.c_str(), 36);
@@ -55,7 +56,7 @@ int main() {
             gCurrentScene = ExitScene::get();
         }
         
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
         SDL_RenderClear(gRenderer);
         gCurrentScene->render();
         SDL_RenderPresent(gRenderer);
