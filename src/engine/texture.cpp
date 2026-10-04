@@ -14,7 +14,7 @@ bool Texture::loadFromFile(std::string path) {
     if (SDL_Surface *loadedSurface = IMG_Load(path.c_str()); loadedSurface == nullptr)
         SDL_Log("Unable to load image %s! SDL_image error: %s\n", path.c_str(), SDL_GetError());
     else {
-        if (SDL_SetSurfaceColorKey(loadedSurface, true, SDL_MapSurfaceRGB(loadedSurface, 0xFF, 0xFF, 0xFF)) == false)
+        if (SDL_SetSurfaceColorKey(loadedSurface, true, SDL_MapSurfaceRGB(loadedSurface, 0xFF, 0x00, 0xFF)) == false)
             SDL_Log("Unable to color key! SDL error: %s", SDL_GetError());
         else {
             if (mTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface); mTexture == nullptr)
