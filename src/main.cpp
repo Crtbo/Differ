@@ -11,11 +11,11 @@
 int main() {
     srand(time(nullptr));
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer("DIFFER", kScreenWidth * 5, kScreenHeight * 5, 0, &gWindow, &gRenderer);
+    SDL_CreateWindowAndRenderer("DIFFER", kScreenWidth * kScale, kScreenHeight * kScale, 0, &gWindow, &gRenderer);
     SDL_SetRenderLogicalPresentation(gRenderer, kScreenWidth, kScreenHeight, SDL_LOGICAL_PRESENTATION_LETTERBOX);
     SDL_SetRenderVSync(gRenderer, 1);
     TTF_Init();
-    SDL_HideCursor();
+    //SDL_HideCursor();
     std::string fontPath{"assets/fonts/PixelOperator-Bold.ttf"};
     gMainFont = TTF_OpenFont(fontPath.c_str(), 27);
     gTitleFont = TTF_OpenFont(fontPath.c_str(), 36);
