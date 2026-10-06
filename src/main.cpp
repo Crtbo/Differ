@@ -15,7 +15,7 @@ int main() {
     SDL_SetRenderLogicalPresentation(gRenderer, kScreenWidth, kScreenHeight, SDL_LOGICAL_PRESENTATION_LETTERBOX);
     SDL_SetRenderVSync(gRenderer, 1);
     TTF_Init();
-    //SDL_HideCursor();
+    SDL_HideCursor();
     std::string fontPath{"assets/fonts/PixelOperator-Bold.ttf"};
     gMainFont = TTF_OpenFont(fontPath.c_str(), 27);
     gTitleFont = TTF_OpenFont(fontPath.c_str(), 36);

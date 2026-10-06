@@ -47,11 +47,11 @@ void EditScene::logic() {
 
     if (mCursor.x < kScreenWidth / 8)
 		mCamera.x -= kCursorVelocity;
-	if (mCursor.x > kScreenWidth * 6 / 8)
+	if (mCursor.x > kScreenWidth * 7 / 8)
 		mCamera.x += kCursorVelocity;
 	if (mCursor.y < kScreenHeight / 8)
 		mCamera.y -= kCursorVelocity;
-	if (mCursor.y > kScreenHeight * 6 / 8)
+	if (mCursor.y > kScreenHeight * 7 / 8)
 		mCamera.y += kCursorVelocity;
 
     if (mCamera.x < 0)
