@@ -23,8 +23,9 @@ int main() {
     SDL_zero(event);
     Timer capTimer;
 
-    Uint64 lastTick = 0;
-    Uint64 currentTick = 0;
+    int lastTick = 0;
+    int currentTick = 0;
+    const float capDelta = 1.f / 30;
     
     gCurrentScene = MenuScene::get();
     if (gCurrentScene->enter() == false) {
@@ -46,8 +47,8 @@ int main() {
         currentTick = SDL_GetTicks();
         gDeltaTime = (currentTick - lastTick) / 1000.f;
 
-        if (gDeltaTime > 1.f / 30)
-            gDeltaTime = 1.f / 30;
+        if (gDeltaTime > capDelta)
+            gDeltaTime = capDelta;
         
         gCurrentScene->logic();
 
