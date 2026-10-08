@@ -65,18 +65,5 @@ int main() {
         Uint64 frameNs = capTimer.getTicksNS();
         if (frameNs < nsPerFrame) SDL_DelayNS(nsPerFrame - frameNs);
     }
-
-    TTF_CloseFont(gMainFont);
-    gMainFont = nullptr;
-    TTF_CloseFont(gTitleFont);
-    gTitleFont = nullptr;
-
-    SDL_DestroyRenderer(gRenderer);
-    gRenderer = nullptr;
-    SDL_DestroyWindow(gWindow);
-    gWindow = nullptr;
-
-    TTF_Quit();
-    SDL_Quit();
     return 0;
 }
