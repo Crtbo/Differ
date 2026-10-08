@@ -43,6 +43,7 @@ bool Texture::loadFromRenderedText(std::string textureText, SDL_Color textColor,
         else {
             mWidth = textSurface->w;
             mHeight = textSurface->h;
+            SDL_SetTextureScaleMode(mTexture, SDL_SCALEMODE_NEAREST);
         }
 
         SDL_DestroySurface(textSurface);
