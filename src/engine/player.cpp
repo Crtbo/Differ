@@ -20,7 +20,7 @@ void Player::handleEvent(SDL_Event &event) {
         switch (event.key.key) {
             case SDLK_SPACE:
                 if (mGrounded || mCoyote) {
-                    mCoyote = kTime - kTime;
+                    mCoyote = 0;
                     mGrounded = false;
                     mVel.y = kJump;
                 } else if (mSliding) {
