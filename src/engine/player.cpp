@@ -120,3 +120,7 @@ void Player::updateBox() {
     mFeetBox.x = mPos.x;
     mFeetBox.y = mPos.y + mHitBox.h - 4;
 }
+
+bool Player::canJump() {
+    return (mSliding && !mGrounded) || (mGrounded || mCoyote);
+}

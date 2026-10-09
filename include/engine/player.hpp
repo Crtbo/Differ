@@ -28,4 +28,5 @@ class Player : public Entity
         void setCamera(SDL_FRect &, int, int);
         void setBox(float, float) override;
         void updateBox() override;
+        bool canJump();
 };
