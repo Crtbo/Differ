@@ -19,15 +19,16 @@ void Player::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         switch (event.key.key) {
             case SDLK_SPACE:
-                if (mGrounded || mCoyote) {
-                    mCoyote = 0;
-                    mGrounded = false;
-                    mVel.y = kJump;
-                } else if (mSliding) {
+                if (mSliding && !mGrounded) {
                     mPushBack = kGravity;
                     mVel.x = keyStates[SDL_SCANCODE_LEFT] ? -kJump / 2 : kJump / 2;
                     mVel.y = kJump;
+                } else if (mGrounded || mCoyote) {
+                    mCoyote = 0;
+                    mGrounded = false;
+                    mVel.y = kJump;
                 }
+                
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
@@ -51,6 +52,7 @@ void Player::move(std::vector <Tile> &tiles) {
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mSliding = true;
+        mCoyote = kTime * 2;
         if (tiles[tileInd].getBox().x < mHitBox.x)
             mPos.x = tiles[tileInd].getBox().x + tiles[tileInd].getBox().w;
         else
