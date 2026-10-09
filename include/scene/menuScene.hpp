@@ -11,6 +11,7 @@ class MenuScene : public Scene {
         int mMapWidth, mMapHeight;
         Texture mPlayerTexture;
         Texture mTileTexture;
+        Texture mDebugTexture;
         Player player;
         std::vector <Tile> mTiles;
         SDL_FRect mCamera = {0, 0, kScreenWidth, kScreenHeight};

@@ -1,5 +1,7 @@
 #include "../../include/scene/menuScene.hpp"
 #include "../../include/scene/editScene.hpp"
+#include "../../include/other/global.hpp"
+#include <sstream>
 
 bool MenuScene::enter() {
     std::string path = "assets/maps/test.map";
@@ -18,6 +20,7 @@ bool MenuScene::exit() {
     mTiles.clear();
     mPlayerTexture.destroy();
     mTileTexture.destroy();
+    mDebugTexture.destroy();
     return true;
 }
 
@@ -31,6 +34,11 @@ void MenuScene::handleEvent(SDL_Event &event) {
 void MenuScene::logic() {
     player.move(mTiles);
     player.setCamera(mCamera, mMapWidth, mMapHeight);
+
+    SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
+    std::stringstream text;
+    text.str(""); text << "Can jump: " << player.canJump(); 
+    mDebugTexture.loadFromRenderedText(text.str().c_str(), textColor, gMainFont);
 }
 
 void MenuScene::render() {
@@ -38,6 +46,7 @@ void MenuScene::render() {
         mTiles[i].render(mCamera, mTileTexture);
 
     player.render(mCamera, mPlayerTexture);
+    mDebugTexture.render(0, 0);
 }
 
 MenuScene::MenuScene() {}
