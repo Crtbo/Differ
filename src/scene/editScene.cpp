@@ -2,8 +2,8 @@
 
 bool EditScene::enter() {
     std::string path = "assets/maps/test.map";
-    mMapWidth = 976;
-    mMapHeight = 320;
+    mMapWidth = 61 * kTileWidth;
+    mMapHeight = 50 * kTileHeight;
     mCurrentTileType = kTileAir;
     mPlacing = false;
     mTileTexture.loadFromFile("assets/images/tiles.png");
