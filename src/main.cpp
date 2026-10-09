@@ -17,7 +17,7 @@ int main() {
     TTF_Init();
     SDL_HideCursor();
     std::string fontPath{"assets/fonts/PixelOperator-Bold.ttf"};
-    gMainFont = TTF_OpenFont(fontPath.c_str(), 27);
+    gMainFont = TTF_OpenFont(fontPath.c_str(), 14);
     gTitleFont = TTF_OpenFont(fontPath.c_str(), 36);
     SDL_Event event;
     SDL_zero(event);
