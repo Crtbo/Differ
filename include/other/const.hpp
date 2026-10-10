@@ -12,3 +12,4 @@ const int kTotalTileSprites = 2;
 
 const int kTileAir = 0;
 const int kTileLand = 1;
+const int kTilePlacehold = 2;
