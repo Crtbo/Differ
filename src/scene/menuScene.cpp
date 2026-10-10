@@ -12,7 +12,7 @@ bool MenuScene::enter() {
     player.setPos(32, 64);
     player.setVel(0, 0);
     player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
-    setTiles(mTiles, mMapWidth, path);
+    setTiles(mTiles, mMapWidth, mMapHeight, path);
     return true;
 }
     

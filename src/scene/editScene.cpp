@@ -8,13 +8,15 @@ bool EditScene::enter() {
     mPlacing = false;
     mTileTexture.loadFromFile("assets/images/tiles.png");
     mCursorTexture.loadFromFile("assets/images/cursor.png");
-    setTiles(mTiles, mMapWidth, path);
+    setTiles(mTiles, mMapWidth, mMapHeight, path);
+    setTiles(mOverlay, mMapWidth, mMapHeight, "");
     return true;
 }
     
 bool EditScene::exit() {
     saveTiles(mTiles, mMapWidth, "assets/maps/test.map");
     mTiles.clear();
+    mOverlay.clear();
     mTileTexture.destroy();
     mCursorTexture.destroy();
     return true;
@@ -67,6 +69,9 @@ void EditScene::logic() {
 void EditScene::render() {
     for (int i = 0; i < mTiles.size(); i++)
         mTiles[i].render(mCamera, mTileTexture);
+
+    for (int i = 0; i < mOverlay.size(); i++)
+        mOverlay[i].render(mCamera, mTileTexture);
     
     mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2);
 }
