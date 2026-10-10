@@ -6,6 +6,7 @@ bool EditScene::enter() {
     mMapHeight = 50 * kTileHeight;
     mCurrentTileType = kTileAir;
     mPlacing = false;
+    mNaked = false;
     mTileTexture.loadFromFile("assets/images/tiles.png");
     mCursorTexture.loadFromFile("assets/images/cursor.png");
     setTiles(mTiles, mMapWidth, mMapHeight, path);
@@ -41,6 +42,9 @@ void EditScene::handleEvent(SDL_Event &event) {
         mPlacing = true; 
     if (event.type == SDL_EVENT_MOUSE_BUTTON_UP && event.button.button == SDL_BUTTON_LEFT)
         mPlacing = false;
+    
+    if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0 && event.key.key == SDLK_SPACE)
+        mNaked = !mNaked;
 }
 
 void EditScene::logic() {
@@ -70,8 +74,9 @@ void EditScene::render() {
     for (int i = 0; i < mTiles.size(); i++)
         mTiles[i].render(mCamera, mTileTexture);
 
-    for (int i = 0; i < mOverlay.size(); i++)
-        mOverlay[i].render(mCamera, mTileTexture);
+    if (!mNaked)
+        for (int i = 0; i < mOverlay.size(); i++)
+            mOverlay[i].render(mCamera, mTileTexture);
     
     mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2);
 }
