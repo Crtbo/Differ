@@ -17,6 +17,6 @@ class Tile {
         void setType(int);
 };
 
-void setTiles(std::vector <Tile> &, int, std::string);
+void setTiles(std::vector <Tile> &, int, int, std::string);
 void saveTiles(std::vector <Tile>, int, std::string);
 void placeTile(std::vector <Tile> &, SDL_Point, SDL_FRect, int);

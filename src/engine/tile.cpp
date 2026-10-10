@@ -29,25 +29,40 @@ void Tile::setType(int type) {
     mType = type;
 }
 
-void setTiles(std::vector <Tile> &tiles, int mapWidth, std::string path) {
-    std::ifstream map(path);
+void setTiles(std::vector <Tile> &tiles, int mapWidth, int mapHeight, std::string path) {
     tiles.clear();
     int x = 0, y = 0;
     int tileType;
     
-    while (map >> tileType) {
-        tiles.emplace_back(x, y, tileType);
+    if (!path.empty()) { 
+        std::ifstream map(path);
 
-        x += kTileWidth;
-        if (x >= mapWidth) {
-            x = 0;
-            y += kTileHeight;
+        while (map >> tileType) {
+            tiles.emplace_back(x, y, tileType);
+
+            x += kTileWidth;
+            if (x >= mapWidth) {
+                x = 0;
+                y += kTileHeight;
+            }
+        }
+
+        map.close();
+    } else {
+        while (y <= mapHeight) {
+            tiles.emplace_back(x, y, 2);
+
+            x += kTileWidth;
+            if (x >= mapWidth) {
+                x = 0;
+                y += kTileHeight;
+            }
         }
     }
 
-    gTileClips[kTileAir] = {0, 0, kTileWidth, kTileHeight};
-    gTileClips[kTileLand] = {kTileWidth, 0, kTileWidth, kTileHeight};  
-    map.close();
+    gTileClips[kTilePlacehold] = {0, 0, kTileWidth, kTileHeight};
+    gTileClips[kTileAir] = {kTileWidth, 0, kTileWidth, kTileHeight};
+    gTileClips[kTileLand] = {kTileWidth * 2, 0, kTileWidth, kTileHeight}; 
 }
 
 void saveTiles(std::vector <Tile> tiles, int mapWidth, std::string path) {
