@@ -16,7 +16,7 @@ class EditScene : public Scene {
         std::vector <Tile> mOverlay;
         SDL_FRect mCamera = {0, 0, kScreenWidth, kScreenHeight};
         SDL_Point mCursor = {kScreenWidth / 2, kScreenHeight / 2};
-        const int kCursorVelocity = 5;
+        const int kCursorVelocity = 2;
         static EditScene sEditScene;
 
         EditScene();
