@@ -11,7 +11,7 @@
 int main() {
     srand(time(nullptr));
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer("DIFFER", kScreenWidth * kScale, kScreenHeight * kScale, 0, &gWindow, &gRenderer);
+    SDL_CreateWindowAndRenderer("Differ", kScreenWidth * kScale, kScreenHeight * kScale, 0, &gWindow, &gRenderer);
     SDL_SetRenderLogicalPresentation(gRenderer, kScreenWidth, kScreenHeight, SDL_LOGICAL_PRESENTATION_LETTERBOX);
     SDL_SetRenderVSync(gRenderer, 1);
     TTF_Init();
