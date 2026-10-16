@@ -6,7 +6,7 @@
 #include "../other/const.hpp"
 #include <vector>
 
-class MenuScene : public Scene {
+class LevelScene : public Scene {
     private:
         int mMapWidth, mMapHeight;
         Texture mPlayerTexture;
@@ -15,12 +15,12 @@ class MenuScene : public Scene {
         Player player;
         std::vector <Tile> mTiles;
         SDL_FRect mCamera = {0, 0, kScreenWidth, kScreenHeight};
-        static MenuScene sMenuScene;
+        static LevelScene sLevelScene;
 
-        MenuScene();
+        LevelScene();
 
     public:
-        static MenuScene *get();
+        static LevelScene *get();
         bool enter() override;
         bool exit() override;
         void handleEvent(SDL_Event &) override;

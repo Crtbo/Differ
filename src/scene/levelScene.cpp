@@ -1,9 +1,9 @@
-#include "../../include/scene/menuScene.hpp"
+#include "../../include/scene/levelScene.hpp"
 #include "../../include/scene/editScene.hpp"
 #include "../../include/other/global.hpp"
 #include <sstream>
 
-bool MenuScene::enter() {
+bool LevelScene::enter() {
     std::string path = "assets/maps/test.map";
     mMapWidth = 61 * kTileWidth;
     mMapHeight = 50 * kTileHeight;
@@ -16,7 +16,7 @@ bool MenuScene::enter() {
     return true;
 }
     
-bool MenuScene::exit() {
+bool LevelScene::exit() {
     mTiles.clear();
     mPlayerTexture.destroy();
     mTileTexture.destroy();
@@ -24,14 +24,14 @@ bool MenuScene::exit() {
     return true;
 }
 
-void MenuScene::handleEvent(SDL_Event &event) {
+void LevelScene::handleEvent(SDL_Event &event) {
     player.handleEvent(event);
 
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_E)
         setNextScene(EditScene::get());
 }
 
-void MenuScene::logic() {
+void LevelScene::logic() {
     player.move(mTiles);
     player.setCamera(mCamera, mMapWidth, mMapHeight);
 
@@ -41,7 +41,7 @@ void MenuScene::logic() {
     mDebugTexture.loadFromRenderedText(text.str().c_str(), textColor, gMainFont);
 }
 
-void MenuScene::render() {
+void LevelScene::render() {
     for (int i = 0; i < mTiles.size(); i++)
         mTiles[i].render(mCamera, mTileTexture);
 
@@ -49,10 +49,10 @@ void MenuScene::render() {
     mDebugTexture.render(0, 0);
 }
 
-MenuScene::MenuScene() {}
+LevelScene::LevelScene() {}
 
-MenuScene *MenuScene::get() {
-    return &sMenuScene;
+LevelScene *LevelScene::get() {
+    return &sLevelScene;
 }
 
-MenuScene MenuScene::sMenuScene;
+LevelScene LevelScene::sLevelScene;
