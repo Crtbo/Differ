@@ -1,4 +1,5 @@
 #include "../../include/scene/editScene.hpp"
+#include "../../include/scene/menuScene.hpp"
 
 bool EditScene::enter() {
     std::string path = "assets/maps/test.map";
@@ -43,8 +44,12 @@ void EditScene::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_MOUSE_BUTTON_UP && event.button.button == SDL_BUTTON_LEFT)
         mPlacing = false;
     
-    if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0 && event.key.key == SDLK_SPACE)
+    if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
+        if (event.key.key == SDLK_BACKSPACE)
+            setNextScene(MenuScene::get());
+        if (event.key.key == SDLK_SPACE)
         mNaked = !mNaked;
+    }
 }
 
 void EditScene::logic() {

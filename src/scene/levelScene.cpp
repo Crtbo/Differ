@@ -1,5 +1,5 @@
 #include "../../include/scene/levelScene.hpp"
-#include "../../include/scene/editScene.hpp"
+#include "../../include/scene/menuScene.hpp"
 #include "../../include/other/global.hpp"
 #include <sstream>
 
@@ -20,15 +20,16 @@ bool LevelScene::exit() {
     mTiles.clear();
     mPlayerTexture.destroy();
     mTileTexture.destroy();
-    mDebugTexture.destroy();
+    mDebugTextTexture.destroy();
     return true;
 }
 
 void LevelScene::handleEvent(SDL_Event &event) {
     player.handleEvent(event);
 
-    if (event.type == SDL_EVENT_KEY_DOWN && event.key.key == SDLK_E)
-        setNextScene(EditScene::get());
+    if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0)
+        if (event.key.key == SDLK_BACKSPACE)
+            setNextScene(MenuScene::get());
 }
 
 void LevelScene::logic() {
