@@ -39,7 +39,7 @@ void LevelScene::logic() {
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
     std::stringstream text;
     text.str(""); text << "Can jump: " << player.canJump(); 
-    mDebugTexture.loadFromRenderedText(text.str().c_str(), textColor, gMainFont);
+    mDebugTextTexture.loadFromRenderedText(text.str().c_str(), textColor, gMainFont);
 }
 
 void LevelScene::render() {
@@ -47,7 +47,7 @@ void LevelScene::render() {
         mTiles[i].render(mCamera, mTileTexture);
 
     player.render(mCamera, mPlayerTexture);
-    mDebugTexture.render(0, 0);
+    mDebugTextTexture.render(0, 0);
 }
 
 LevelScene::LevelScene() {}

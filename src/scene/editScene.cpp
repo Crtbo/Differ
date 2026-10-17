@@ -48,7 +48,7 @@ void EditScene::handleEvent(SDL_Event &event) {
         if (event.key.key == SDLK_BACKSPACE)
             setNextScene(MenuScene::get());
         if (event.key.key == SDLK_SPACE)
-        mNaked = !mNaked;
+            mNaked = !mNaked;
     }
 }
 
