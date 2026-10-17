@@ -2,7 +2,7 @@
 #include "../include/other/global.hpp"
 #include "../include/other/timer.hpp"
 #include "../include/scene/exitScene.hpp"
-#include "../include/scene/levelScene.hpp"
+#include "../include/scene/menuScene.hpp"
 #include <SDL3_image/SDL_image.h>
 #include <cstdlib>
 #include <ctime>
@@ -27,7 +27,7 @@ int main() {
     int currentTick = 0;
     const float capDelta = 1.f / 30;
     
-    gCurrentScene = LevelScene::get();
+    gCurrentScene = MenuScene::get();
     if (gCurrentScene->enter() == false) {
         gCurrentScene->exit();
         gCurrentScene = ExitScene::get();
