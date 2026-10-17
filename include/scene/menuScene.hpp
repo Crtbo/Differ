@@ -1,8 +1,15 @@
 #pragma once
 #include "scene.hpp"
+#include "../engine/texture.hpp"
 
 class MenuScene : public Scene {
     private:
+        int mCurrentPoint;
+        Texture mPointerTexture;
+        Texture mFaceTexture;
+        Texture mTextStartTexture;
+        Texture mTextEditTexture;
+        Texture mTextExitTexture;
         static MenuScene sMenuScene;
 
         MenuScene();
