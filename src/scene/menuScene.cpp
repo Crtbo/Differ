@@ -3,7 +3,6 @@
 #include "../../include/scene/exitScene.hpp"
 #include "../../include/scene/levelScene.hpp"
 #include "../../include/other/global.hpp"
-#include <cmath>
 
 bool MenuScene::enter() {
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
@@ -29,20 +28,21 @@ void MenuScene::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         if (event.key.key == SDLK_RETURN)
             switch (mCurrentPoint) {
-                case 0: setNextScene(LevelScene::get());
-                case 1: setNextScene(EditScene::get());
+                case 0: setNextScene(LevelScene::get()); break;
+                case 1: setNextScene(EditScene::get()); break;
                 case 2: setNextScene(ExitScene::get());
             }
-        if (event.key.key == SDLK_UP)
-            mCurrentPoint = (mCurrentPoint + 1) % 3;
         if (event.key.key == SDLK_DOWN)
-            mCurrentPoint = std::abs((mCurrentPoint - 1) % 3);
+            mCurrentPoint = (mCurrentPoint + 1) % 3;
+        if (event.key.key == SDLK_UP) {
+            mCurrentPoint = mCurrentPoint - 1;
+            if (mCurrentPoint < 0)
+                mCurrentPoint = 2;
+        }
     }
 }
 
-void MenuScene::logic() {
-    SDL_Log("%d", mCurrentPoint);
-}
+void MenuScene::logic() {}
 
 void MenuScene::render() {
     mPointerTexture.render(290, 100 + (mPointerTexture.getHeight() / 2 ) + (20 * mCurrentPoint));
