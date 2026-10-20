@@ -78,8 +78,8 @@ void Player::move(std::vector <Tile> &tiles) {
     mVel.y += kGravity;
     if (mVel.y >= kMaxPull && !mSliding) 
         mVel.y = kMaxPull;
-    else if (mVel.y >= kMaxPull / 2 && mSliding)
-        mVel.y = kMaxPull / 2;
+    else if (mVel.y >= kMaxPull / 3 && mSliding)
+        mVel.y = kMaxPull / 3;
 
     if (mPushBack) {
         mPushBack--;
