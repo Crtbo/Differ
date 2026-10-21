@@ -108,6 +108,18 @@ void Player::setCamera(SDL_FRect &camera, int width, int height) {
         camera.y = height - camera.h;
 }
 
+void Player::setPos(float x, float y) {
+    mPos.x = x;
+    mPos.y = y;
+    updateBox();
+}
+
+void Player::setVel(float x, float y) {
+    mVel.x = x;
+    mVel.y = y;
+    updateBox();
+}
+
 void Player::setBox(float w, float h) {
     mHitBox.w = w;
     mHitBox.h = h;

@@ -26,6 +26,8 @@ class Player : public Entity
         void move(std::vector <Tile> &);
         void render(SDL_FRect &, Texture &);
         void setCamera(SDL_FRect &, int, int);
+        void setPos(float, float) override;
+        void setVel(float, float) override;
         void setBox(float, float) override;
         void updateBox() override;
         bool canJump();
