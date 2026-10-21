@@ -8,10 +8,8 @@ class Entity {
         SDL_FRect mHitBox;
     
     public:
-        SDL_FPoint getPos();
-        SDL_FRect getHitBox();
-        void setPos(float, float);
-        void setVel(float, float);
-        virtual void setBox(float, float);
-        virtual void updateBox();
+        virtual void setPos(float, float) = 0;
+        virtual void setVel(float, float) = 0;
+        virtual void setBox(float, float) = 0;
+        virtual void updateBox() = 0;
 };
