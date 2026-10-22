@@ -11,6 +11,7 @@ bool MenuScene::enter() {
     mTextStartTexture.loadFromRenderedText("Start level", textColor, gMainFont);
     mTextEditTexture.loadFromRenderedText("Edit level", textColor, gMainFont);
     mTextExitTexture.loadFromRenderedText("Exit game", textColor, gMainFont);
+    mTextCopyrightTexture.loadFromRenderedText("ChRT 2026 ©", textColor, gMainFont);
     mCurrentPoint = 0;
     return true;
 }
@@ -21,6 +22,7 @@ bool MenuScene::exit() {
     mTextStartTexture.destroy();
     mTextEditTexture.destroy();
     mTextExitTexture.destroy();
+    mTextCopyrightTexture.destroy();
     return true;
 }
 
@@ -50,6 +52,7 @@ void MenuScene::render() {
     mTextStartTexture.render(kScreenWidth - 100 - mTextStartTexture.getWidth(), 100);
     mTextEditTexture.render(kScreenWidth - 100 - mTextEditTexture.getWidth(), 120);
     mTextExitTexture.render(kScreenWidth - 100 - mTextExitTexture.getWidth(), 140);
+    mTextCopyrightTexture.render((kScreenWidth - mTextCopyrightTexture.getWidth()) / 2, kScreenHeight - mTextCopyrightTexture.getHeight());
 }
 
 MenuScene::MenuScene() {}
