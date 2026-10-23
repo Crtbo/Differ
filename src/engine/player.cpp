@@ -52,7 +52,7 @@ void Player::move(std::vector <Tile> &tiles) {
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mSliding = true;
-        mCoyote = kTime * 2;
+        mCoyote = kTime;
         if (tiles[tileInd].getBox().x < mHitBox.x)
             mPos.x = tiles[tileInd].getBox().x + tiles[tileInd].getBox().w;
         else
@@ -65,7 +65,7 @@ void Player::move(std::vector <Tile> &tiles) {
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mGrounded = true;
-        mCoyote = kTime;
+        mCoyote = kTime * 2;
         if (tiles[tileInd].getBox().y > mHitBox.y)
             mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
         else {
