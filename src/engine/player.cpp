@@ -95,16 +95,16 @@ void Player::render(SDL_FRect &camera, Texture &texture) {
 }
 
 void Player::setCamera(SDL_FRect &camera, int width, int height) {
-    camera.x = static_cast<int>(mPos.x + mHitBox.w / 2 - kScreenWidth / 2);
-    camera.y = static_cast<int>(mPos.y + mHitBox.h / 2 - kScreenHeight / 2);
+    camera.x = (int)(mPos.x - (kScreenWidth - mHitBox.w) / 2);
+	camera.y = (int)(mPos.y - (kScreenHeight - mHitBox.h) / 2);
 
     if (camera.x < 0)
         camera.x = 0;
-    else if (camera.x + camera.w > width)
-        camera.x = width - camera.w;
     if (camera.y < 0)
         camera.y = 0;
-    else if (camera.y + camera.h > height)
+    if (camera.x + camera.w > width)
+        camera.x = width - camera.w;
+    if (camera.y + camera.h > height)
         camera.y = height - camera.h;
 }
 
