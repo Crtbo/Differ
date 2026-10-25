@@ -1,6 +1,7 @@
 #pragma once
 #include "entity.hpp"
 #include "tile.hpp"
+#include "animation.hpp"
 #include "../other/const.hpp"
 #include <vector>
 
@@ -8,6 +9,8 @@ class Player : public Entity
 {
     private:
         SDL_FRect mFeetBox;
+        SDL_FRect mCurrentFrame;
+        Animation mAnimation;
         int mModifier;
         int mPushBack;
         bool mGrounded;

@@ -8,6 +8,7 @@ Player::Player() {
     mSliding = false;
     mPushBack = 0;
     mCoyote = kTime;
+    mAnimation.setFrames(0, 0, 16, 32, 4);
 }
 
 void Player::handleEvent(SDL_Event &event) {
@@ -85,10 +86,13 @@ void Player::move(std::vector <Tile> &tiles) {
         mPushBack--;
         mVel.x = mVel.x > 0 ? mVel.x - kGravity : mVel.x + kGravity;
     }
+
+    mAnimation.loop();
+    mCurrentFrame = mAnimation.getFrame();
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
-    texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y);
+    texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y, &mSrc);
     // SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0x00);
     // SDL_RenderRect(gRenderer, &mHitBox);
     // SDL_RenderRect(gRenderer, &mFeetBox);
@@ -121,9 +125,9 @@ void Player::setVel(float x, float y) {
 }
 
 void Player::setBox(float w, float h) {
-    mHitBox.w = w;
+    mHitBox.w = w / mAnimation.mMaxFrames;
     mHitBox.h = h;
-    mFeetBox.w = w;
+    mFeetBox.w = w / mAnimation.mMaxFrames;
     mFeetBox.h = 4;
     updateBox();
 }
