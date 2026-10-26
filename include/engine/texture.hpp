@@ -14,7 +14,7 @@ class Texture {
         bool loadFromFile(std::string);
         bool loadFromRenderedText(std::string, SDL_Color, TTF_Font *);
         void destroy();
-        void render(float, float, SDL_FRect *clip = nullptr);
+        void render(float, float, SDL_FRect *clip = nullptr, SDL_FlipMode flipMode = SDL_FLIP_NONE);
         int getWidth();
         int getHeight();
         bool isLoaded();

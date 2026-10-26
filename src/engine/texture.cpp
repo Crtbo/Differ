@@ -61,7 +61,7 @@ void Texture::destroy() {
     mHeight = 0;
 }
 
-void Texture::render(float x, float y, SDL_FRect *clip) {
+void Texture::render(float x, float y, SDL_FRect *clip, SDL_FlipMode flipMode) {
     SDL_FRect dstRect = {x, y, (float)mWidth, (float)mHeight};
     
     if (clip != nullptr) {
@@ -69,7 +69,7 @@ void Texture::render(float x, float y, SDL_FRect *clip) {
         dstRect.h = clip->h;
     }
 
-    SDL_RenderTexture(gRenderer, mTexture, clip, &dstRect);
+    SDL_RenderTextureRotated(gRenderer, mTexture, clip, &dstRect, 0, nullptr, flipMode);
 }
 
 int Texture::getWidth() {
