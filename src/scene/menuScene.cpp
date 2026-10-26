@@ -7,7 +7,7 @@
 bool MenuScene::enter() {
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
     mPointerTexture.loadFromFile("assets/images/pointer.png");
-    mFaceTexture.loadFromFile("assets/images/face.png");
+    mFaceTexture.loadFromFile("assets/images/title.png");
     mTextStartTexture.loadFromRenderedText("Start level", textColor, gMainFont);
     mTextEditTexture.loadFromRenderedText("Edit level", textColor, gMainFont);
     mTextExitTexture.loadFromRenderedText("Exit game", textColor, gMainFont);
