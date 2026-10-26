@@ -10,7 +10,10 @@ class Player : public Entity
     private:
         SDL_FRect mFeetBox;
         SDL_FRect mCurrentFrame;
-        Animation mAnimation;
+        SDL_FlipMode mFlipped;
+        Animation mIdleAnimation;
+        Animation mWalkingAnimation;
+        Frame mAirFrame = {0, 64, 16, 32};
         int mModifier;
         int mPushBack;
         bool mGrounded;
