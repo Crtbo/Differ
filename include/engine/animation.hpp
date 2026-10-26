@@ -16,8 +16,11 @@ struct Animation {
     std::vector <Frame> mFrames;
     int mCurrentFrame = 0;
     int mMaxFrames = 0;
+    int mFrameSpeed = 0;
+    int mTicks = 0;
 
-    void setFrames(float x, float y, float w, float h, int numOfFrames) {
+    void setFrames(float x, float y, float w, float h, int numOfFrames, int speed) {
+        mFrameSpeed = speed;
         mMaxFrames = numOfFrames;
 
         for (int i = 0; i < numOfFrames; i++)
@@ -33,9 +36,14 @@ struct Animation {
     }
 
     void loop() {
-        mCurrentFrame++;
+        mTicks++;
+        if (mTicks == mFrameSpeed) {
+            mCurrentFrame++;
 
-        if (mCurrentFrame > mMaxFrames - 1)
-            mCurrentFrame = 0;
+            if (mCurrentFrame > mMaxFrames - 1)
+                mCurrentFrame = 0;
+            
+            mTicks = 0;
+        }
     }
 };
