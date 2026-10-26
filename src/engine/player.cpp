@@ -92,7 +92,7 @@ void Player::move(std::vector <Tile> &tiles) {
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
-    texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y, &mSrc);
+    texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y, &mCurrentFrame);
     // SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0x00);
     // SDL_RenderRect(gRenderer, &mHitBox);
     // SDL_RenderRect(gRenderer, &mFeetBox);
