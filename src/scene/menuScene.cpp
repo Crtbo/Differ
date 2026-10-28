@@ -7,7 +7,8 @@
 bool MenuScene::enter() {
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
     mPointerTexture.loadFromFile("assets/images/pointer.png");
-    mFaceTexture.loadFromFile("assets/images/title.png");
+    mCool1Texture.loadFromFile("assets/images/menu_1.png");
+    mCool2Texture.loadFromFile("assets/images/menu_2.png");
     mTextTitleTexture.loadFromRenderedText("Differ", textColor, gTitleFont);
     mTextStartTexture.loadFromRenderedText("Start level", textColor, gMainFont);
     mTextEditTexture.loadFromRenderedText("Edit level", textColor, gMainFont);
@@ -19,7 +20,8 @@ bool MenuScene::enter() {
     
 bool MenuScene::exit() {
     mPointerTexture.destroy();
-    mFaceTexture.destroy();
+    mCool1Texture.destroy();
+    mCool2Texture.destroy();
     mTextTitleTexture.destroy();
     mTextStartTexture.destroy();
     mTextEditTexture.destroy();
@@ -50,7 +52,8 @@ void MenuScene::logic() {}
 
 void MenuScene::render() {
     mPointerTexture.render(290, 100 + (mPointerTexture.getHeight() / 2 ) + (20 * mCurrentPoint));
-    mFaceTexture.render(-60, 20, nullptr, SDL_FLIP_HORIZONTAL);
+    if (mCurrentPoint == 0) mCool1Texture.render(-60, 20, nullptr, SDL_FLIP_HORIZONTAL);
+    if (mCurrentPoint == 1) mCool2Texture.render(20, 20);
     mTextTitleTexture.render(kScreenWidth - 100 - mTextTitleTexture.getWidth(), 20);
     mTextStartTexture.render(kScreenWidth - 100 - mTextStartTexture.getWidth(), 100);
     mTextEditTexture.render(kScreenWidth - 100 - mTextEditTexture.getWidth(), 120);
