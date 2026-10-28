@@ -5,8 +5,8 @@
 
 bool LevelScene::enter() {
     std::string path = "assets/maps/test.map";
-    mMapWidth = 61 * kTileWidth;
-    mMapHeight = 50 * kTileHeight;
+    mMapWidth = 61 * kTileSize;
+    mMapHeight = 50 * kTileSize;
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
     player.setPos(32, 64);

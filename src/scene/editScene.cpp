@@ -3,8 +3,8 @@
 
 bool EditScene::enter() {
     std::string path = "assets/maps/test.map";
-    mMapWidth = 61 * kTileWidth;
-    mMapHeight = 50 * kTileHeight;
+    mMapWidth = 61 * kTileSize;
+    mMapHeight = 50 * kTileSize;
     mCurrentTileType = kTileAir;
     mPlacing = false;
     mNaked = false;

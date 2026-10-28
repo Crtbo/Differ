@@ -8,9 +8,9 @@ Player::Player() {
     mSliding = false;
     mPushBack = 0;
     mCoyote = kTime;
-    mIdleAnimation.setFrames(0, 0, kTileWidth, kTileHeight * 2, 2, 30);
-    mWalkingAnimation.setFrames(0, 32, kTileWidth, kTileHeight * 2, 4, 10);
-    mRunningAnimation.setFrames(0, 64, kTileWidth, kTileHeight * 2, 4, 7);
+    mIdleAnimation.setFrames(0, 0, kTileSize, kTileSize * 2, 2, 30);
+    mWalkingAnimation.setFrames(0, 32, kTileSize, kTileSize * 2, 4, 10);
+    mRunningAnimation.setFrames(0, 64, kTileSize, kTileSize * 2, 4, 7);
     mFlipped = SDL_FLIP_NONE;
 }
 

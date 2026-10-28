@@ -14,8 +14,8 @@ class Player : public Entity
         Animation mIdleAnimation;
         Animation mWalkingAnimation;
         Animation mRunningAnimation;
-        Frame mAirFrame = {32, 0, kTileWidth, kTileHeight * 2};
-        Frame mSlideFrame = {48, 0, kTileWidth, kTileHeight * 2};
+        Frame mAirFrame = {32, 0, kTileSize, kTileSize * 2};
+        Frame mSlideFrame = {48, 0, kTileSize, kTileSize * 2};
         int mModifier;
         int mPushBack;
         bool mGrounded;

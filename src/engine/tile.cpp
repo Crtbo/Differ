@@ -7,8 +7,8 @@
 Tile::Tile(int x, int y, int tileType) {
     mBox.x = x;
     mBox.y = y;
-    mBox.w = kTileWidth;
-    mBox.h = kTileHeight;
+    mBox.w = kTileSize;
+    mBox.h = kTileSize;
     mType = tileType;
 }
 
@@ -40,10 +40,10 @@ void setTiles(std::vector <Tile> &tiles, int mapWidth, int mapHeight, std::strin
         while (map >> tileType) {
             tiles.emplace_back(x, y, tileType);
 
-            x += kTileWidth;
+            x += kTileSize;
             if (x >= mapWidth) {
                 x = 0;
-                y += kTileHeight;
+                y += kTileSize;
             }
         }
 
@@ -52,17 +52,17 @@ void setTiles(std::vector <Tile> &tiles, int mapWidth, int mapHeight, std::strin
         while (y <= mapHeight) {
             tiles.emplace_back(x, y, 2);
 
-            x += kTileWidth;
+            x += kTileSize;
             if (x >= mapWidth) {
                 x = 0;
-                y += kTileHeight;
+                y += kTileSize;
             }
         }
     }
 
-    gTileClips[kTilePlacehold] = {0, 0, kTileWidth, kTileHeight};
-    gTileClips[kTileAir] = {kTileWidth, 0, kTileWidth, kTileHeight};
-    gTileClips[kTileLand] = {kTileWidth * 2, 0, kTileWidth, kTileHeight}; 
+    gTileClips[kTilePlacehold] = {0, 0, kTileSize, kTileSize};
+    gTileClips[kTileAir] = {kTileSize, 0, kTileSize, kTileSize};
+    gTileClips[kTileLand] = {kTileSize * 2, 0, kTileSize, kTileSize}; 
 }
 
 void saveTiles(std::vector <Tile> tiles, int mapWidth, std::string path) {
@@ -71,7 +71,7 @@ void saveTiles(std::vector <Tile> tiles, int mapWidth, std::string path) {
     for (int i = 0; i < tiles.size(); i++) {
         map << tiles[i].getType() << " ";
 
-        if ((i + 1) % (mapWidth / kTileWidth) == 0)
+        if ((i + 1) % (mapWidth / kTileSize) == 0)
             map << '\n';
     }
         
