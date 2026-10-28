@@ -13,7 +13,9 @@ class Player : public Entity
         SDL_FlipMode mFlipped;
         Animation mIdleAnimation;
         Animation mWalkingAnimation;
-        Frame mAirFrame = {0, 64, 16, 32};
+        Animation mRunningAnimation;
+        Frame mAirFrame = {32, 0, kTileWidth, kTileHeight * 2};
+        Frame mSlideFrame = {48, 0, kTileWidth, kTileHeight * 2};
         int mModifier;
         int mPushBack;
         bool mGrounded;

@@ -8,8 +8,9 @@ Player::Player() {
     mSliding = false;
     mPushBack = 0;
     mCoyote = kTime;
-    mIdleAnimation.setFrames(0, 0, 16, 32, 2, 30);
-    mWalkingAnimation.setFrames(0, 32, 16, 32, 4, 10);
+    mIdleAnimation.setFrames(0, 0, kTileWidth, kTileHeight * 2, 2, 30);
+    mWalkingAnimation.setFrames(0, 32, kTileWidth, kTileHeight * 2, 4, 10);
+    mRunningAnimation.setFrames(0, 64, kTileWidth, kTileHeight * 2, 4, 7);
     mFlipped = SDL_FLIP_NONE;
 }
 
@@ -100,17 +101,19 @@ void Player::move(std::vector <Tile> &tiles) {
     }
 
 
-    if (mVel.x != 0) {
+    if (mVel.x != 0 && mModifier == 1) {
         mWalkingAnimation.loop();
         mCurrentFrame = mWalkingAnimation.getFrame();
+    } else if (mVel.x != 0 && mModifier == 2) {
+        mRunningAnimation.loop();
+        mCurrentFrame = mRunningAnimation.getFrame();
     } else {
         mIdleAnimation.loop();
         mCurrentFrame = mIdleAnimation.getFrame();
     }  
 
     if (!mGrounded) mCurrentFrame = mAirFrame.mSrc;
-
-    
+    if (mSliding && !mGrounded) mCurrentFrame = mSlideFrame.mSrc;
 }
 
 void Player::render(SDL_FRect &camera, Texture &texture) {
