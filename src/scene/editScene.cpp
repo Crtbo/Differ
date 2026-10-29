@@ -28,7 +28,7 @@ void EditScene::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_MOUSE_MOTION) {
 		mCursor.x = event.motion.x / kScale; // DIVIDE BY SCREEN SCALE AMOUNT
 		mCursor.y = event.motion.y / kScale;
-    } else if (event.type == SDL_EVENT_MOUSE_WHEEL )
+    } else if (event.type == SDL_EVENT_MOUSE_WHEEL)
         if (event.wheel.y > 0) {
             mCurrentTileType--;
             if (mCurrentTileType < kTileAir)
@@ -53,26 +53,28 @@ void EditScene::handleEvent(SDL_Event &event) {
 }
 
 void EditScene::logic() {
-    if (mPlacing)
-        placeTile(mTiles, mCursor, mCamera, mCurrentTileType);
+    if (SDL_GetMouseFocus()) {
+        if (mPlacing)
+            placeTile(mTiles, mCursor, mCamera, mCurrentTileType);
 
-    if (mCursor.x < kScreenWidth / 8)
-		mCamera.x -= kCursorVelocity;
-	if (mCursor.x > kScreenWidth * 7 / 8)
-		mCamera.x += kCursorVelocity;
-	if (mCursor.y < kScreenHeight / 8)
-		mCamera.y -= kCursorVelocity;
-	if (mCursor.y > kScreenHeight * 7 / 8)
-		mCamera.y += kCursorVelocity;
+        if (mCursor.x < kScreenWidth / 8)
+            mCamera.x -= kCursorVelocity;
+        if (mCursor.x > kScreenWidth * 7 / 8)
+            mCamera.x += kCursorVelocity;
+        if (mCursor.y < kScreenHeight / 8)
+            mCamera.y -= kCursorVelocity;
+        if (mCursor.y > kScreenHeight * 7 / 8)
+            mCamera.y += kCursorVelocity;
 
-    if (mCamera.x < 0)
-        mCamera.x = 0;
-    if (mCamera.y < 0)
-        mCamera.y = 0;
-    if (mCamera.x > mMapWidth - mCamera.w)
-        mCamera.x = mMapWidth - mCamera.w;
-    if (mCamera.y > mMapHeight - mCamera.h)
-        mCamera.y = mMapHeight - mCamera.h;
+        if (mCamera.x < 0)
+            mCamera.x = 0;
+        if (mCamera.y < 0)
+            mCamera.y = 0;
+        if (mCamera.x > mMapWidth - mCamera.w)
+            mCamera.x = mMapWidth - mCamera.w;
+        if (mCamera.y > mMapHeight - mCamera.h)
+            mCamera.y = mMapHeight - mCamera.h;
+    }
 }
 
 void EditScene::render() {
@@ -83,6 +85,7 @@ void EditScene::render() {
         for (int i = 0; i < mOverlay.size(); i++)
             mOverlay[i].render(mCamera, mTileTexture);
     
+    if (SDL_GetMouseFocus())
     mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2);
 }
 
