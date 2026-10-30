@@ -1,5 +1,6 @@
 #include "../../include/scene/editScene.hpp"
 #include "../../include/scene/menuScene.hpp"
+#include "../../include/other/global.hpp"
 
 bool EditScene::enter() {
     std::string path = "assets/maps/test.map";
@@ -12,6 +13,7 @@ bool EditScene::enter() {
     mCursorTexture.loadFromFile("assets/images/cursor.png");
     setTiles(mTiles, mMapWidth, mMapHeight, path);
     setTiles(mOverlay, mMapWidth, mMapHeight, "");
+    mMainViewport.y = kViewportOffset;
     return true;
 }
     
@@ -21,6 +23,9 @@ bool EditScene::exit() {
     mOverlay.clear();
     mTileTexture.destroy();
     mCursorTexture.destroy();
+
+    mMainViewport.y = 0;
+    SDL_SetRenderViewport(gRenderer, &mMainViewport);
     return true;
 }
 
@@ -78,6 +83,15 @@ void EditScene::logic() {
 }
 
 void EditScene::render() {
+    SDL_SetRenderViewport(gRenderer, &mSideViewport);
+
+    mTileTexture.render(0, 0, &gTileClips[mCurrentTileType]);
+
+    if (SDL_GetMouseFocus()) // This is not good (two cursors for both viewports)
+        mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2 + kViewportOffset);
+
+
+    SDL_SetRenderViewport(gRenderer, &mMainViewport);
     for (int i = 0; i < mTiles.size(); i++)
         mTiles[i].render(mCamera, mTileTexture);
 
