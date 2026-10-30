@@ -32,7 +32,7 @@ bool EditScene::exit() {
 void EditScene::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_MOUSE_MOTION) {
 		mCursor.x = event.motion.x / kScale; // DIVIDE BY SCREEN SCALE AMOUNT
-		mCursor.y = event.motion.y / kScale;
+		mCursor.y = event.motion.y / kScale - kViewportOffset;
     } else if (event.type == SDL_EVENT_MOUSE_WHEEL)
         if (event.wheel.y > 0) {
             mCurrentTileType--;
@@ -68,7 +68,7 @@ void EditScene::logic() {
             mCamera.x += kCursorVelocity;
         if (mCursor.y < kScreenHeight / 8)
             mCamera.y -= kCursorVelocity;
-        if (mCursor.y > kScreenHeight * 7 / 8)
+        if (mCursor.y > kScreenHeight * 7 / 8 - kViewportOffset)
             mCamera.y += kCursorVelocity;
 
         if (mCamera.x < 0)
@@ -77,8 +77,8 @@ void EditScene::logic() {
             mCamera.y = 0;
         if (mCamera.x > mMapWidth - mCamera.w)
             mCamera.x = mMapWidth - mCamera.w;
-        if (mCamera.y > mMapHeight - mCamera.h)
-            mCamera.y = mMapHeight - mCamera.h;
+        if (mCamera.y > mMapHeight - mCamera.h + kViewportOffset)
+            mCamera.y = mMapHeight - mCamera.h + kViewportOffset;
     }
 }
 
