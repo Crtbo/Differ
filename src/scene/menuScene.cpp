@@ -51,13 +51,13 @@ void MenuScene::handleEvent(SDL_Event &event) {
 void MenuScene::logic() {}
 
 void MenuScene::render() {
-    mPointerTexture.render(290, 100 + (mPointerTexture.getHeight() / 2 ) + (20 * mCurrentPoint));
+    mPointerTexture.render(kScreenWidth - 45, 100 + (mPointerTexture.getHeight() / 2 ) + (20 * mCurrentPoint));
     if (mCurrentPoint == 0) mCool1Texture.render(-60, 20, nullptr, SDL_FLIP_HORIZONTAL);
     if (mCurrentPoint == 1) mCool2Texture.render(20, 20);
-    mTextTitleTexture.render(kScreenWidth - 100 - mTextTitleTexture.getWidth(), 20);
-    mTextStartTexture.render(kScreenWidth - 100 - mTextStartTexture.getWidth(), 100);
-    mTextEditTexture.render(kScreenWidth - 100 - mTextEditTexture.getWidth(), 120);
-    mTextExitTexture.render(kScreenWidth - 100 - mTextExitTexture.getWidth(), 140);
+    mTextTitleTexture.render(kScreenWidth - 50 - mTextTitleTexture.getWidth(), 20);
+    mTextStartTexture.render(kScreenWidth - 60 - mTextStartTexture.getWidth(), 100);
+    mTextEditTexture.render(kScreenWidth - 60 - mTextEditTexture.getWidth(), 120);
+    mTextExitTexture.render(kScreenWidth - 60 - mTextExitTexture.getWidth(), 140);
     mTextCopyrightTexture.render((kScreenWidth - mTextCopyrightTexture.getWidth()) / 2, kScreenHeight - mTextCopyrightTexture.getHeight());
 }
 
