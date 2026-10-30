@@ -4,13 +4,15 @@
 
 bool EditScene::enter() {
     std::string path = "assets/maps/test.map";
+    SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
+    mTileTexture.loadFromFile("assets/images/tiles.png");
+    mCursorTexture.loadFromFile("assets/images/cursor.png");
+    mInfoTextTexture.loadFromRenderedText(" - CURRENT TILE (scroll to change)", textColor, gMainFont);
     mMapWidth = 61 * kTileSize;
     mMapHeight = 50 * kTileSize;
     mCurrentTileType = kTileAir;
     mPlacing = false;
     mNaked = false;
-    mTileTexture.loadFromFile("assets/images/tiles.png");
-    mCursorTexture.loadFromFile("assets/images/cursor.png");
     setTiles(mTiles, mMapWidth, mMapHeight, path);
     setTiles(mOverlay, mMapWidth, mMapHeight, "");
     mMainViewport.y = kViewportOffset;
@@ -84,12 +86,11 @@ void EditScene::logic() {
 
 void EditScene::render() {
     SDL_SetRenderViewport(gRenderer, &mSideViewport);
-
+    mInfoTextTexture.render(16, 0);
     mTileTexture.render(0, 0, &gTileClips[mCurrentTileType]);
 
     if (SDL_GetMouseFocus()) // This is not good (two cursors for both viewports)
         mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2 + kViewportOffset);
-
 
     SDL_SetRenderViewport(gRenderer, &mMainViewport);
     for (int i = 0; i < mTiles.size(); i++)
@@ -100,7 +101,7 @@ void EditScene::render() {
             mOverlay[i].render(mCamera, mTileTexture);
     
     if (SDL_GetMouseFocus())
-    mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2);
+        mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2);
 }
 
 EditScene::EditScene() {}

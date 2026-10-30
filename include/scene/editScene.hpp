@@ -14,6 +14,7 @@ class EditScene : public Scene {
         bool mPlacing, mNaked;
         Texture mTileTexture;
         Texture mCursorTexture;
+        Texture mInfoTextTexture;
         std::vector <Tile> mTiles;
         std::vector <Tile> mOverlay;
         SDL_FRect mCamera = {0, 0, kScreenWidth, kScreenHeight};
