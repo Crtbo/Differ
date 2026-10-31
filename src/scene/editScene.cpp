@@ -25,6 +25,7 @@ bool EditScene::exit() {
     mOverlay.clear();
     mTileTexture.destroy();
     mCursorTexture.destroy();
+    mInfoTextTexture.destroy();
 
     mMainViewport.y = 0;
     SDL_SetRenderViewport(gRenderer, &mMainViewport);
