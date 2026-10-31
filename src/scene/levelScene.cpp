@@ -9,7 +9,7 @@ bool LevelScene::enter() {
     mMapHeight = 50 * kTileSize;
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
-    player.setPos(32, 64);
+    player.setPos(mMapWidth / 2, mMapHeight - 3 * kTileSize);
     player.setVel(0, 0);
     player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, mMapHeight, path);
@@ -36,10 +36,12 @@ void LevelScene::logic() {
     player.move(mTiles);
     player.setCamera(mCamera, mMapWidth, mMapHeight);
 
+    /*
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
     std::stringstream text;
     text.str(""); text << "Can jump: " << player.canJump(); 
     mDebugTextTexture.loadFromRenderedText(text.str().c_str(), textColor, gMainFont);
+    */
 }
 
 void LevelScene::render() {
@@ -47,7 +49,7 @@ void LevelScene::render() {
         mTiles[i].render(mCamera, mTileTexture);
 
     player.render(mCamera, mPlayerTexture);
-    mDebugTextTexture.render(0, 0);
+    // mDebugTextTexture.render(0, 0);
 }
 
 LevelScene::LevelScene() {}
