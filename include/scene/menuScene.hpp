@@ -8,6 +8,7 @@ class MenuScene : public Scene {
         Texture mPointerTexture;
         Texture mCool1Texture;
         Texture mCool2Texture;
+        Texture mCool3Texture;
         Texture mTextTitleTexture;
         Texture mTextStartTexture;
         Texture mTextEditTexture;
