@@ -18,12 +18,12 @@ void Player::handleEvent(SDL_Event &event) {
     const bool *keyStates = SDL_GetKeyboardState(nullptr);
     mModifier = keyStates[SDL_SCANCODE_LSHIFT] ? 2 : 1;
     if (!mPushBack) {
-        if (keyStates[SDL_SCANCODE_RIGHT] && keyStates[SDL_SCANCODE_LEFT])
+        if ((keyStates[SDL_SCANCODE_RIGHT] || keyStates[SDL_SCANCODE_D]) && (keyStates[SDL_SCANCODE_LEFT] || keyStates[SDL_SCANCODE_A]))
             mVel.x = 0;
-        else if (keyStates[SDL_SCANCODE_LEFT]) {
+        else if (keyStates[SDL_SCANCODE_LEFT] || keyStates[SDL_SCANCODE_A]) {
             mVel.x = -kSpeed;
             mFlipped = SDL_FLIP_NONE;
-        } else if (keyStates[SDL_SCANCODE_RIGHT]) {
+        } else if (keyStates[SDL_SCANCODE_RIGHT] || keyStates[SDL_SCANCODE_D]) {
             mVel.x = kSpeed;
             mFlipped = SDL_FLIP_HORIZONTAL;
         } else
