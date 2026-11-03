@@ -16,6 +16,7 @@ bool EditScene::enter() {
     setTiles(mTiles, mMapWidth, mMapHeight, path);
     setTiles(mOverlay, mMapWidth, mMapHeight, "");
     mMainViewport.y = kViewportOffset;
+    mCameraVel = {0, 0};
     return true;
 }
     
@@ -57,6 +58,23 @@ void EditScene::handleEvent(SDL_Event &event) {
             setNextScene(MenuScene::get());
         if (event.key.key == SDLK_SPACE)
             mNaked = !mNaked;
+        if (event.key.key == SDLK_LEFT || event.key.key == SDLK_A)
+            mCameraVel.x -= kCursorVelocity;
+        if (event.key.key == SDLK_RIGHT || event.key.key == SDLK_D)
+            mCameraVel.x += kCursorVelocity;
+        if (event.key.key == SDLK_UP || event.key.key == SDLK_W)
+            mCameraVel.y -= kCursorVelocity;
+        if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S)
+            mCameraVel.y += kCursorVelocity;
+    }  else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
+        if (event.key.key == SDLK_LEFT || event.key.key == SDLK_A)
+            mCameraVel.x += kCursorVelocity;
+        if (event.key.key == SDLK_RIGHT || event.key.key == SDLK_D)
+            mCameraVel.x -= kCursorVelocity;
+        if (event.key.key == SDLK_UP || event.key.key == SDLK_W)
+            mCameraVel.y += kCursorVelocity;
+        if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S)
+            mCameraVel.y -= kCursorVelocity;
     }
 }
 
@@ -73,16 +91,19 @@ void EditScene::logic() {
             mCamera.y -= kCursorVelocity;
         if (mCursor.y > kScreenHeight * 7 / 8 - kViewportOffset)
             mCamera.y += kCursorVelocity;
-
-        if (mCamera.x < 0)
-            mCamera.x = 0;
-        if (mCamera.y < 0)
-            mCamera.y = 0;
-        if (mCamera.x > mMapWidth - mCamera.w)
-            mCamera.x = mMapWidth - mCamera.w;
-        if (mCamera.y > mMapHeight - mCamera.h + kViewportOffset)
-            mCamera.y = mMapHeight - mCamera.h + kViewportOffset;
     }
+
+    mCamera.x += mCameraVel.x;
+    mCamera.y += mCameraVel.y;
+
+    if (mCamera.x < 0)
+        mCamera.x = 0;
+    if (mCamera.y < 0)
+        mCamera.y = 0;
+    if (mCamera.x > mMapWidth - mCamera.w)
+        mCamera.x = mMapWidth - mCamera.w;
+    if (mCamera.y > mMapHeight - mCamera.h + kViewportOffset)
+        mCamera.y = mMapHeight - mCamera.h + kViewportOffset;
 }
 
 void EditScene::render() {

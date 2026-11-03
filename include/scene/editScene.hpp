@@ -21,6 +21,7 @@ class EditScene : public Scene {
         SDL_Rect mMainViewport = {0, kViewportOffset, kScreenWidth, kScreenHeight};
         SDL_Rect mSideViewport = {0, 0, kScreenWidth, kViewportOffset};
         SDL_Point mCursor = {kScreenWidth / 2, kScreenHeight / 2};
+        SDL_Point mCameraVel;
         static EditScene sEditScene;
 
         EditScene();
