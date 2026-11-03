@@ -49,8 +49,8 @@ void setTiles(std::vector <Tile> &tiles, int mapWidth, int mapHeight, std::strin
 
         map.close();
     } else {
-        while (y <= mapHeight) {
-            tiles.emplace_back(x, y, 2);
+        while (y < mapHeight) {
+            tiles.emplace_back(x, y, kTilePlacehold);
 
             x += kTileSize;
             if (x >= mapWidth) {
