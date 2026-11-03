@@ -7,7 +7,7 @@
 
 class EditScene : public Scene {
     private:
-        const int kCursorVelocity = 2;
+        const int kCursorVel = 2;
         const int kViewportOffset = 16;
         int mMapWidth, mMapHeight;
         int mCurrentTileType;

@@ -59,22 +59,22 @@ void EditScene::handleEvent(SDL_Event &event) {
         if (event.key.key == SDLK_SPACE)
             mNaked = !mNaked;
         if (event.key.key == SDLK_LEFT || event.key.key == SDLK_A)
-            mCameraVel.x -= kCursorVelocity;
+            mCameraVel.x -= kCursorVel;
         if (event.key.key == SDLK_RIGHT || event.key.key == SDLK_D)
-            mCameraVel.x += kCursorVelocity;
+            mCameraVel.x += kCursorVel;
         if (event.key.key == SDLK_UP || event.key.key == SDLK_W)
-            mCameraVel.y -= kCursorVelocity;
+            mCameraVel.y -= kCursorVel;
         if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S)
-            mCameraVel.y += kCursorVelocity;
+            mCameraVel.y += kCursorVel;
     }  else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         if (event.key.key == SDLK_LEFT || event.key.key == SDLK_A)
-            mCameraVel.x += kCursorVelocity;
+            mCameraVel.x += kCursorVel;
         if (event.key.key == SDLK_RIGHT || event.key.key == SDLK_D)
-            mCameraVel.x -= kCursorVelocity;
+            mCameraVel.x -= kCursorVel;
         if (event.key.key == SDLK_UP || event.key.key == SDLK_W)
-            mCameraVel.y += kCursorVelocity;
+            mCameraVel.y += kCursorVel;
         if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S)
-            mCameraVel.y -= kCursorVelocity;
+            mCameraVel.y -= kCursorVel;
     }
 }
 
@@ -84,13 +84,13 @@ void EditScene::logic() {
             placeTile(mTiles, mCursor, mCamera, mCurrentTileType);
 
         if (mCursor.x < kScreenWidth / 8)
-            mCamera.x -= kCursorVelocity;
+            mCamera.x -= kCursorVel;
         if (mCursor.x > kScreenWidth * 7 / 8)
-            mCamera.x += kCursorVelocity;
+            mCamera.x += kCursorVel;
         if (mCursor.y < kScreenHeight / 8)
-            mCamera.y -= kCursorVelocity;
+            mCamera.y -= kCursorVel;
         if (mCursor.y > kScreenHeight * 7 / 8 - kViewportOffset)
-            mCamera.y += kCursorVelocity;
+            mCamera.y += kCursorVel;
     }
 
     mCamera.x += mCameraVel.x;
