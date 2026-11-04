@@ -20,7 +20,6 @@ bool LevelScene::exit() {
     mTiles.clear();
     mPlayerTexture.destroy();
     mTileTexture.destroy();
-    mDebugTextTexture.destroy();
     return true;
 }
 
@@ -35,13 +34,6 @@ void LevelScene::handleEvent(SDL_Event &event) {
 void LevelScene::logic() {
     player.move(mTiles);
     player.setCamera(mCamera, mMapWidth, mMapHeight);
-
-    /*
-    SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
-    std::stringstream text;
-    text.str(""); text << "Can jump: " << player.canJump(); 
-    mDebugTextTexture.loadFromRenderedText(text.str().c_str(), textColor, gMainFont);
-    */
 }
 
 void LevelScene::render() {
@@ -49,7 +41,6 @@ void LevelScene::render() {
         mTiles[i].render(mCamera, mTileTexture);
 
     player.render(mCamera, mPlayerTexture);
-    // mDebugTextTexture.render(0, 0);
 }
 
 LevelScene::LevelScene() {}

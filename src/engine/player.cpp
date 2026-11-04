@@ -100,7 +100,6 @@ void Player::move(std::vector <Tile> &tiles) {
         mVel.x = mVel.x > 0 ? mVel.x - kGravity : mVel.x + kGravity;
     }
 
-
     if (mVel.x != 0 && mModifier == 1) {
         mWalkingAnimation.loop();
         mCurrentFrame = mWalkingAnimation.getFrame();
@@ -162,8 +161,4 @@ void Player::updateBox() {
     mHitBox.y = mPos.y;
     mFeetBox.x = mPos.x;
     mFeetBox.y = mPos.y + mHitBox.h - 4;
-}
-
-bool Player::canJump() {
-    return (mSliding && !mGrounded) || (mGrounded || mCoyote);
 }
