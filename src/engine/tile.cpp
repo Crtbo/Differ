@@ -62,7 +62,16 @@ void setTiles(std::vector <Tile> &tiles, int mapWidth, int mapHeight, std::strin
 
     gTileClips[kTilePlacehold] = {0, 0, kTileSize, kTileSize};
     gTileClips[kTileAir] = {kTileSize, 0, kTileSize, kTileSize};
-    gTileClips[kTileLand] = {kTileSize * 2, 0, kTileSize, kTileSize}; 
+    gTileClips[kTileSpecial] = {kTileSize * 2, 0, kTileSize, kTileSize}; 
+    gTileClips[kTileUpLeft] = {0, kTileSize, kTileSize, kTileSize}; 
+    gTileClips[kTileUpMid] = {kTileSize, kTileSize, kTileSize, kTileSize}; 
+    gTileClips[kTileUpRight] = {kTileSize * 2, kTileSize, kTileSize, kTileSize}; 
+    gTileClips[kTileMidLeft] = {0, kTileSize * 2, kTileSize, kTileSize}; 
+    gTileClips[kTileMidMid] = {kTileSize, kTileSize * 2, kTileSize, kTileSize}; 
+    gTileClips[kTileMidRight] = {kTileSize * 2, kTileSize * 2, kTileSize, kTileSize};
+    gTileClips[kTileDownleft] = {0, kTileSize * 3, kTileSize, kTileSize};
+    gTileClips[kTileDownMid] = {kTileSize, kTileSize * 3, kTileSize, kTileSize};
+    gTileClips[kTileDownRight] = {kTileSize * 2, kTileSize * 3, kTileSize, kTileSize};
 }
 
 void saveTiles(std::vector <Tile> tiles, int mapWidth, std::string path) {
