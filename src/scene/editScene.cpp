@@ -41,10 +41,10 @@ void EditScene::handleEvent(SDL_Event &event) {
         if (event.wheel.y > 0) {
             mCurrentTileType--;
             if (mCurrentTileType < kTileAir)
-                mCurrentTileType = kTileLand;        
+                mCurrentTileType = kTileDownRight;        
         } else {
             mCurrentTileType++;
-            if (mCurrentTileType > kTileLand)
+            if (mCurrentTileType > kTileDownRight)
                 mCurrentTileType = kTileAir;    
         }
     
