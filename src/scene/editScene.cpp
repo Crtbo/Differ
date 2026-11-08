@@ -40,12 +40,12 @@ void EditScene::handleEvent(SDL_Event &event) {
     } else if (event.type == SDL_EVENT_MOUSE_WHEEL)
         if (event.wheel.y > 0) {
             mCurrentTileType--;
-            if (mCurrentTileType < kTileAir)
-                mCurrentTileType = kTileDownRight;        
+            if (mCurrentTileType < 1)
+                mCurrentTileType = kTotalTileSprites - 1;        
         } else {
             mCurrentTileType++;
-            if (mCurrentTileType > kTileDownRight)
-                mCurrentTileType = kTileAir;    
+            if (mCurrentTileType > kTotalTileSprites - 1)
+                mCurrentTileType = 1;    
         }
     
     if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_LEFT)
