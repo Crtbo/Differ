@@ -7,7 +7,7 @@ const int kScreenFps = 60;
 const int kScale = 4;
 
 const int kTileSize = 16;
-const int kTotalTileSprites = 12;
+const int kTotalTileSprites = 14;
 
 const int kTilePlacehold = 0;
 const int kTileAir = 1;
@@ -21,3 +21,5 @@ const int kTileMidRight = 8;
 const int kTileDownleft = 9;
 const int kTileDownMid = 10;
 const int kTileDownRight = 11;
+const int kTileRob1 = 12;
+const int kTileRob2 = 13;
