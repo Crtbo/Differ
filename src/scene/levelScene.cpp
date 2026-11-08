@@ -9,7 +9,7 @@ bool LevelScene::enter() {
     mMapHeight = 50 * kTileSize;
     mPlayerTexture.loadFromFile("assets/images/player.png");
     mTileTexture.loadFromFile("assets/images/tiles.png");
-    player.setPos(mMapWidth / 2, mMapHeight - 3 * kTileSize);
+    player.setPos(8 * kTileSize, 6 * kTileSize);
     player.setVel(0, 0);
     player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, mMapHeight, path);
