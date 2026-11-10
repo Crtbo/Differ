@@ -12,6 +12,7 @@ class MenuScene : public Scene {
         Texture mTextTitleTexture;
         Texture mTextStartTexture;
         Texture mTextEditTexture;
+        Texture mTextSettingsTexture;
         Texture mTextExitTexture;
         Texture mTextCopyrightTexture;
         static MenuScene sMenuScene;

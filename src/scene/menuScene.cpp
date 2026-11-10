@@ -2,6 +2,7 @@
 #include "../../include/scene/editScene.hpp"
 #include "../../include/scene/exitScene.hpp"
 #include "../../include/scene/levelScene.hpp"
+#include "../../include/scene/settingsScene.hpp"
 #include "../../include/other/global.hpp"
 
 bool MenuScene::enter() {
@@ -13,6 +14,7 @@ bool MenuScene::enter() {
     mTextTitleTexture.loadFromRenderedText("Differ", textColor, gTitleFont);
     mTextStartTexture.loadFromRenderedText("Start level", textColor, gMainFont);
     mTextEditTexture.loadFromRenderedText("Edit level", textColor, gMainFont);
+    mTextSettingsTexture.loadFromRenderedText("Settings", textColor, gMainFont);
     mTextExitTexture.loadFromRenderedText("Exit game", textColor, gMainFont);
     mTextCopyrightTexture.loadFromRenderedText("ChRT 2026 ©", textColor, gMainFont);
     mCurrentPoint = 0;
@@ -27,6 +29,7 @@ bool MenuScene::exit() {
     mTextTitleTexture.destroy();
     mTextStartTexture.destroy();
     mTextEditTexture.destroy();
+    mTextSettingsTexture.destroy();
     mTextExitTexture.destroy();
     mTextCopyrightTexture.destroy();
     return true;
@@ -38,14 +41,15 @@ void MenuScene::handleEvent(SDL_Event &event) {
             switch (mCurrentPoint) {
                 case 0: setNextScene(LevelScene::get()); break;
                 case 1: setNextScene(EditScene::get()); break;
-                case 2: setNextScene(ExitScene::get());
+                case 2: setNextScene(SettingsScene::get()); break;
+                case 3: setNextScene(ExitScene::get());
             }
         if (event.key.key == SDLK_DOWN)
-            mCurrentPoint = (mCurrentPoint + 1) % 3;
+            mCurrentPoint = (mCurrentPoint + 1) % 4;
         if (event.key.key == SDLK_UP) {
             mCurrentPoint = mCurrentPoint - 1;
             if (mCurrentPoint < 0)
-                mCurrentPoint = 2;
+                mCurrentPoint = 3;
         }
     }
 }
@@ -53,14 +57,15 @@ void MenuScene::handleEvent(SDL_Event &event) {
 void MenuScene::logic() {}
 
 void MenuScene::render() {
-    mPointerTexture.render(kScreenWidth - 45, 100 + (mPointerTexture.getHeight() / 2 ) + (20 * mCurrentPoint));
+    mPointerTexture.render(kScreenWidth - 45, 100 + (mPointerTexture.getHeight() / 2) + (20 * mCurrentPoint));
     if (mCurrentPoint == 0) mCool1Texture.render(-60, 20, nullptr, SDL_FLIP_HORIZONTAL);
     if (mCurrentPoint == 1) mCool2Texture.render(20, 20);
-    if (mCurrentPoint == 2) mCool3Texture.render(40, 0);
+    if (mCurrentPoint == 3) mCool3Texture.render(40, 0);
     mTextTitleTexture.render(kScreenWidth - 50 - mTextTitleTexture.getWidth(), 20);
     mTextStartTexture.render(kScreenWidth - 60 - mTextStartTexture.getWidth(), 100);
     mTextEditTexture.render(kScreenWidth - 60 - mTextEditTexture.getWidth(), 120);
-    mTextExitTexture.render(kScreenWidth - 60 - mTextExitTexture.getWidth(), 140);
+    mTextSettingsTexture.render(kScreenWidth - 60 - mTextSettingsTexture.getWidth(), 140);
+    mTextExitTexture.render(kScreenWidth - 60 - mTextExitTexture.getWidth(), 160);
     mTextCopyrightTexture.render((kScreenWidth - mTextCopyrightTexture.getWidth()) / 2, kScreenHeight - mTextCopyrightTexture.getHeight());
 }
 
