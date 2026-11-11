@@ -47,7 +47,7 @@ void Player::handleEvent(SDL_Event &event) {
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
             case SDLK_SPACE:
-                if (!mGrounded && mVel.y <= 0)
+                if (!mGrounded && mVel.y <= -kGravity)
                     mVel.y = -kGravity;
         }
     }
