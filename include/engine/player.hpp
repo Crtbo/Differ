@@ -20,10 +20,10 @@ class Player : public Entity
         int mPushBack;
         bool mGrounded;
         bool mSliding;
-        int mCoyote;
+        int mCoyoteTimer;
 
         const int kJump = -200;
-        const int kTime = 7;
+        const int kCoyote = 10;
         const int kGravity = 10;
         const int kMaxPull = 200;
         const int kSpeed = 100;

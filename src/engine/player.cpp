@@ -7,7 +7,7 @@ Player::Player() {
     mGrounded = false;
     mSliding = false;
     mPushBack = 0;
-    mCoyote = kTime;
+    mCoyoteTimer = 0;
     mIdleAnimation.setFrames(0, 0, kTileSize, kTileSize * 2, 2, 30);
     mWalkingAnimation.setFrames(0, 32, kTileSize, kTileSize * 2, 4, 10);
     mRunningAnimation.setFrames(0, 64, kTileSize, kTileSize * 2, 4, 7);
@@ -57,9 +57,6 @@ void Player::move(std::vector <Tile> &tiles) {
     int tileInd;
     mGrounded = false;
     mSliding = false;
-    
-    if (mCoyote > 0)
-        mCoyote--;
 
     mPos.x += mVel.x * mModifier * gDeltaTime;
     updateBox();
@@ -79,7 +76,6 @@ void Player::move(std::vector <Tile> &tiles) {
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mGrounded = true;
-        mCoyote = kTime * 2;
         if (tiles[tileInd].getBox().y > mHitBox.y)
             mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
         else {
@@ -88,6 +84,11 @@ void Player::move(std::vector <Tile> &tiles) {
         }
         updateBox();
     }
+
+    if (mGrounded)
+        mCoyoteTimer = kCoyote;
+    else if (mCoyoteTimer > 0)
+        mCoyoteTimer--;
     
     mVel.y += kGravity;
     if (mVel.y >= kMaxPull && !mSliding) 
@@ -110,7 +111,6 @@ void Player::move(std::vector <Tile> &tiles) {
         mIdleAnimation.loop();
         mCurrentFrame = mIdleAnimation.getFrame();
     }  
-
     if (!mGrounded) mCurrentFrame = mAirFrame.mSrc;
     if (mSliding && !mGrounded) mCurrentFrame = mSlideFrame.mSrc;
 }
