@@ -21,8 +21,10 @@ class Player : public Entity
         bool mGrounded;
         bool mSliding;
         int mCoyoteTimer;
+        int mJumpTimer;
 
         const int kJump = -200;
+        const int kJumpBuffer = 6;
         const int kCoyote = 10;
         const int kGravity = 10;
         const int kMaxPull = 200;

@@ -8,6 +8,7 @@ Player::Player() {
     mSliding = false;
     mPushBack = 0;
     mCoyoteTimer = 0;
+    mJumpTimer = 0;
     mIdleAnimation.setFrames(0, 0, kTileSize, kTileSize * 2, 2, 30);
     mWalkingAnimation.setFrames(0, 32, kTileSize, kTileSize * 2, 4, 10);
     mRunningAnimation.setFrames(0, 64, kTileSize, kTileSize * 2, 4, 7);
@@ -37,18 +38,16 @@ void Player::handleEvent(SDL_Event &event) {
                     mPushBack = kGravity;
                     mVel.x = keyStates[SDL_SCANCODE_LEFT] ? -kJump / 2 : kJump / 2;
                     mVel.y = kJump;
-                } else if (mGrounded || mCoyote) {
-                    mCoyote = 0;
-                    mGrounded = false;
-                    mVel.y = kJump;
-                }
+                } else
+                    mJumpTimer = kJumpBuffer;
                 
         }
     } else if (event.type == SDL_EVENT_KEY_UP && event.key.repeat == 0) {
         switch (event.key.key) {
             case SDLK_SPACE:
                 if (!mGrounded && mVel.y <= -kGravity)
-                    mVel.y = -kGravity;
+                    mVel.y = mVel.y * 0.5;
+                mCoyoteTimer = 0;
         }
     }
 }
@@ -63,7 +62,7 @@ void Player::move(std::vector <Tile> &tiles) {
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mSliding = true;
-        mCoyote = kTime;
+        mCoyoteTimer = kJumpBuffer;
         if (tiles[tileInd].getBox().x < mHitBox.x)
             mPos.x = tiles[tileInd].getBox().x + tiles[tileInd].getBox().w;
         else
@@ -89,6 +88,15 @@ void Player::move(std::vector <Tile> &tiles) {
         mCoyoteTimer = kCoyote;
     else if (mCoyoteTimer > 0)
         mCoyoteTimer--;
+
+    if (mJumpTimer > 0 && mCoyoteTimer > 0) {
+        mGrounded = false;
+        mVel.y = kJump;
+        mJumpTimer = 0;
+        mCoyoteTimer = 0;
+    }
+    if (mJumpTimer > 0)
+        mJumpTimer--;
     
     mVel.y += kGravity;
     if (mVel.y >= kMaxPull && !mSliding) 
