@@ -74,10 +74,10 @@ void Player::logic(std::vector <Tile> &tiles) {
     setBoxPos();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
-        mGrounded = true;
-        if (tiles[tileInd].getBox().y > mHitBox.y)
+        if (tiles[tileInd].getBox().y > mHitBox.y) {
             mPos.y = tiles[tileInd].getBox().y - mHitBox.h;
-        else {
+            mGrounded = true;
+        } else {
             mPos.y = tiles[tileInd].getBox().y + tiles[tileInd].getBox().h;
             mVel.y = 0;   
         }
