@@ -10,6 +10,6 @@ class Entity {
     public:
         virtual void setPos(float, float) = 0;
         virtual void setVel(float, float) = 0;
-        virtual void setBox(float, float) = 0;
-        virtual void updateBox() = 0;
+        virtual void setBoxSize(float, float) = 0;
+        virtual void setBoxPos() = 0;
 };

@@ -33,12 +33,11 @@ class Player : public Entity
     public:
         Player();
         void handleEvent(SDL_Event &);
-        void move(std::vector <Tile> &);
+        void logic(std::vector <Tile> &);
         void render(SDL_FRect &, Texture &);
         void setCamera(SDL_FRect &, int, int);
         void setPos(float, float) override;
         void setVel(float, float) override;
-        void setBox(float, float) override;
-        void updateBox() override;
-        bool canJump();
+        void setBoxSize(float, float) override;
+        void setBoxPos() override;
 };

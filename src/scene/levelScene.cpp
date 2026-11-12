@@ -11,7 +11,7 @@ bool LevelScene::enter() {
     mTileTexture.loadFromFile("assets/images/tiles.png");
     player.setPos(8 * kTileSize, 6 * kTileSize);
     player.setVel(0, 0);
-    player.setBox(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
+    player.setBoxSize(mPlayerTexture.getWidth(), mPlayerTexture.getHeight());
     setTiles(mTiles, mMapWidth, mMapHeight, path);
     return true;
 }
@@ -32,7 +32,7 @@ void LevelScene::handleEvent(SDL_Event &event) {
 }
 
 void LevelScene::logic() {
-    player.move(mTiles);
+    player.logic(mTiles);
     player.setCamera(mCamera, mMapWidth, mMapHeight);
 }
 

@@ -52,13 +52,13 @@ void Player::handleEvent(SDL_Event &event) {
     }
 }
 
-void Player::move(std::vector <Tile> &tiles) {
+void Player::logic(std::vector <Tile> &tiles) {
     int tileInd;
     mGrounded = false;
     mSliding = false;
 
     mPos.x += mVel.x * mModifier * gDeltaTime;
-    updateBox();
+    setBoxPos();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mSliding = true;
@@ -67,11 +67,11 @@ void Player::move(std::vector <Tile> &tiles) {
             mPos.x = tiles[tileInd].getBox().x + tiles[tileInd].getBox().w;
         else
             mPos.x = tiles[tileInd].getBox().x - mHitBox.w;
-        updateBox();
+        setBoxPos();
     }
 
     mPos.y += mVel.y * gDeltaTime;
-    updateBox();
+    setBoxPos();
     tileInd = checkSurface(mHitBox, tiles);
     if (tileInd != -1) {
         mGrounded = true;
@@ -81,7 +81,7 @@ void Player::move(std::vector <Tile> &tiles) {
             mPos.y = tiles[tileInd].getBox().y + tiles[tileInd].getBox().h;
             mVel.y = 0;   
         }
-        updateBox();
+        setBoxPos();
     }
 
     if (mGrounded)
@@ -147,24 +147,24 @@ void Player::setCamera(SDL_FRect &camera, int width, int height) {
 void Player::setPos(float x, float y) {
     mPos.x = x;
     mPos.y = y;
-    updateBox();
+    setBoxPos();
 }
 
 void Player::setVel(float x, float y) {
     mVel.x = x;
     mVel.y = y;
-    updateBox();
+    setBoxPos();
 }
 
-void Player::setBox(float w, float h) {
+void Player::setBoxSize(float w, float h) {
     mHitBox.w = w / 4;
     mHitBox.h = h / 3;
     mFeetBox.w = w / 4;
     mFeetBox.h = 4;
-    updateBox();
+    setBoxPos();
 }
 
-void Player::updateBox() {
+void Player::setBoxPos() {
     mHitBox.x = mPos.x;
     mHitBox.y = mPos.y;
     mFeetBox.x = mPos.x;
