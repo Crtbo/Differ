@@ -21,9 +21,16 @@ bool SettingsScene::exit() {
 }
 
 void SettingsScene::handleEvent(SDL_Event &event) {
-    if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0)
+    if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
         if (event.key.key == SDLK_BACKSPACE)
             setNextScene(MenuScene::get());
+        if (event.key.key == SDLK_UP && gScale < 4)
+            gScale++;
+        if (event.key.key == SDLK_DOWN && gScale > 1)
+            gScale--;
+
+        SDL_SetWindowSize(gWindow, kScreenWidth * gScale, kScreenHeight * gScale);
+    }
 }
 
 void SettingsScene::logic() {
