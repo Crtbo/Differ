@@ -7,4 +7,6 @@ extern SDL_Renderer *gRenderer;
 extern TTF_Font *gMainFont;
 extern TTF_Font *gTitleFont;
 extern SDL_FRect gTileClips[];
+
+extern int gScale;
 extern float gDeltaTime;

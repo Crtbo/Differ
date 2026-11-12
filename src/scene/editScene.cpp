@@ -35,8 +35,8 @@ bool EditScene::exit() {
 
 void EditScene::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_MOUSE_MOTION) {
-		mCursor.x = event.motion.x / kScale; // DIVIDE BY SCREEN SCALE AMOUNT
-		mCursor.y = event.motion.y / kScale - kViewportOffset;
+		mCursor.x = event.motion.x / gScale; // DIVIDE BY SCREEN SCALE AMOUNT
+		mCursor.y = event.motion.y / gScale - kViewportOffset;
     } else if (event.type == SDL_EVENT_MOUSE_WHEEL)
         if (event.wheel.y > 0) {
             mCurrentTileType--;

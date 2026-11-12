@@ -6,4 +6,6 @@ SDL_Renderer *gRenderer = nullptr;
 TTF_Font *gMainFont = nullptr;
 TTF_Font *gTitleFont = nullptr;
 SDL_FRect gTileClips[kTotalTileSprites];
+
+int gScale = 4;
 float gDeltaTime;

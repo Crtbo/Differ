@@ -4,7 +4,6 @@
 const int kScreenWidth = 384;
 const int kScreenHeight = 216;
 const int kScreenFps = 60;
-const int kScale = 4;
 
 const int kTileSize = 16;
 const int kTotalTileSprites = 14;
