@@ -39,7 +39,7 @@ void SettingsScene::logic() {
 }
 
 void SettingsScene::render() {
-    mFaceTexture.render((kScreenWidth - mFaceTexture.getWidth() / 2) / 2, (kScreenHeight - mFaceTexture.getHeight()) / 2, &mCurrentFrame);
+    mFaceTexture.render((kScreenWidth - mFaceTexture.getWidth() / 2) / 2, kScreenHeight - mFaceTexture.getHeight() - 1, &mCurrentFrame);
 }
 
 SettingsScene SettingsScene::sSettingsScene;
