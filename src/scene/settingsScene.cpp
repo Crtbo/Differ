@@ -11,9 +11,10 @@ SettingsScene *SettingsScene::get() {
 
 bool SettingsScene::enter() {
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
+    varText << kScreenWidth * gScale << 'x' << kScreenHeight * gScale;
     mFaceTexture.loadFromFile("assets/images/face.png");
     mCurrentTexture.loadFromFile("assets/images/pointer.png");
-    varText << kScreenWidth * gScale << 'x' << kScreenHeight * gScale;
+    mTextInfoTexture.loadFromRenderedText("Press UP or DOWN to change resolution", textColor, gMainFont);
     mTextResoultionTexture.loadFromRenderedText(varText.str().c_str(), textColor, gTitleFont);
     mFaceAnimation.setFrames(0, 0, 45, 67, 2, 20);
     return true;
@@ -22,6 +23,7 @@ bool SettingsScene::enter() {
 bool SettingsScene::exit() {
     mFaceTexture.destroy();
     mCurrentTexture.destroy();
+    mTextInfoTexture.destroy();
     mTextResoultionTexture.destroy();
     varText.str("");
     return true;
@@ -52,6 +54,7 @@ void SettingsScene::logic() {
 
 void SettingsScene::render() {
     mFaceTexture.render((kScreenWidth - mFaceTexture.getWidth() / 2) / 2, kScreenHeight - mFaceTexture.getHeight() - 1, &mCurrentFrame);
+    mTextInfoTexture.render((kScreenWidth - mTextInfoTexture.getWidth()) / 2, 60);
     mTextResoultionTexture.render((kScreenWidth - mTextResoultionTexture.getWidth()) / 2, 30);
 }
 

@@ -10,6 +10,7 @@ class SettingsScene : public Scene {
         Texture mFaceTexture;
         Texture mCurrentTexture;
         Texture mTextResoultionTexture;
+        Texture mTextInfoTexture;
         Animation mFaceAnimation;
         SDL_FRect mCurrentFrame;
         std::stringstream varText;
