@@ -10,13 +10,20 @@ SettingsScene *SettingsScene::get() {
 }
 
 bool SettingsScene::enter() {
+    SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
     mFaceTexture.loadFromFile("assets/images/face.png");
+    mCurrentTexture.loadFromFile("assets/images/pointer.png");
+    varText << kScreenWidth * gScale << 'x' << kScreenHeight * gScale;
+    mTextResoultionTexture.loadFromRenderedText(varText.str().c_str(), textColor, gTitleFont);
     mFaceAnimation.setFrames(0, 0, 45, 67, 2, 20);
     return true;
 }
     
 bool SettingsScene::exit() {
     mFaceTexture.destroy();
+    mCurrentTexture.destroy();
+    mTextResoultionTexture.destroy();
+    varText.str("");
     return true;
 }
 
@@ -30,6 +37,11 @@ void SettingsScene::handleEvent(SDL_Event &event) {
             gScale--;
 
         SDL_SetWindowSize(gWindow, kScreenWidth * gScale, kScreenHeight * gScale);
+        varText.str("");
+        varText << kScreenWidth * gScale << 'x' << kScreenHeight * gScale;
+        SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
+        mTextResoultionTexture.loadFromRenderedText(varText.str().c_str(), textColor, gTitleFont);
+        varText.clear();
     }
 }
 
@@ -40,6 +52,7 @@ void SettingsScene::logic() {
 
 void SettingsScene::render() {
     mFaceTexture.render((kScreenWidth - mFaceTexture.getWidth() / 2) / 2, kScreenHeight - mFaceTexture.getHeight() - 1, &mCurrentFrame);
+    mTextResoultionTexture.render((kScreenWidth - mTextResoultionTexture.getWidth()) / 2, 30);
 }
 
 SettingsScene SettingsScene::sSettingsScene;
