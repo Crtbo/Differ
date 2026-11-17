@@ -36,7 +36,7 @@ void Player::handleEvent(SDL_Event &event) {
             case SDLK_SPACE:
                 if (mSliding && !mGrounded) {
                     mPushBack = kGravity;
-                    mVel.x = keyStates[SDL_SCANCODE_LEFT] ? -kJump / 2 : kJump / 2;
+                    mVel.x = keyStates[SDL_SCANCODE_LEFT] || keyStates[SDL_SCANCODE_A] ? -kJump / 2 : kJump / 2;
                     mVel.y = kJump;
                 } else
                     mJumpTimer = kJumpBuffer;
