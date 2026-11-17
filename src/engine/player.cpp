@@ -126,8 +126,8 @@ void Player::logic(std::vector <Tile> &tiles) {
 void Player::render(SDL_FRect &camera, Texture &texture) {
     texture.render((int)mPos.x - camera.x, (int)mPos.y - camera.y, &mCurrentFrame, mFlipped);
     // SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0x00, 0x00);
-    // SDL_RenderRect(gRenderer, &mHitBox);
-    // SDL_RenderRect(gRenderer, &mFeetBox);
+    // SDL_FRect temp = {(int)mHitBox.x - camera.x, (int)mHitBox.y - camera.y, mHitBox.w, mHitBox.h};
+    // SDL_RenderRect(gRenderer, &temp);
 }
 
 void Player::setCamera(SDL_FRect &camera, int width, int height) {
@@ -159,14 +159,10 @@ void Player::setVel(float x, float y) {
 void Player::setBoxSize(float w, float h) {
     mHitBox.w = w / 4;
     mHitBox.h = h / 3;
-    mFeetBox.w = w / 4;
-    mFeetBox.h = 4;
     setBoxPos();
 }
 
 void Player::setBoxPos() {
     mHitBox.x = mPos.x;
     mHitBox.y = mPos.y;
-    mFeetBox.x = mPos.x;
-    mFeetBox.y = mPos.y + mHitBox.h - 4;
 }

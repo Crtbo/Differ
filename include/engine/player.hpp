@@ -8,7 +8,6 @@
 class Player : public Entity
 {
     private:
-        SDL_FRect mFeetBox;
         SDL_FRect mCurrentFrame;
         SDL_FlipMode mFlipped;
         Animation mIdleAnimation;
