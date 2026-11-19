@@ -54,7 +54,7 @@ void EditScene::handleEvent(SDL_Event &event) {
         mPlacing = false;
     
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
-        if (event.key.key == SDLK_BACKSPACE)
+        if (event.key.key == SDLK_BACKSPACE || event.key.key == SDLK_X)
             setNextScene(MenuScene::get());
         if (event.key.key == SDLK_SPACE)
             mNaked = !mNaked;

@@ -31,7 +31,7 @@ bool SettingsScene::exit() {
 
 void SettingsScene::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
-        if (event.key.key == SDLK_BACKSPACE)
+        if (event.key.key == SDLK_BACKSPACE || event.key.key == SDLK_X)
             setNextScene(MenuScene::get());
         if (event.key.key == SDLK_UP && gScale < 4)
             gScale++;

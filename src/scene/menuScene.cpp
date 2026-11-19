@@ -37,16 +37,16 @@ bool MenuScene::exit() {
 
 void MenuScene::handleEvent(SDL_Event &event) {
     if (event.type == SDL_EVENT_KEY_DOWN && event.key.repeat == 0) {
-        if (event.key.key == SDLK_RETURN)
+        if (event.key.key == SDLK_RETURN || event.key.key == SDLK_Z || event.key.key == SDLK_Y)
             switch (mCurrentPoint) {
                 case 0: setNextScene(LevelScene::get()); break;
                 case 1: setNextScene(EditScene::get()); break;
                 case 2: setNextScene(SettingsScene::get()); break;
                 case 3: setNextScene(ExitScene::get());
             }
-        if (event.key.key == SDLK_DOWN)
+        if (event.key.key == SDLK_DOWN || event.key.key == SDLK_S)
             mCurrentPoint = (mCurrentPoint + 1) % 4;
-        if (event.key.key == SDLK_UP) {
+        if (event.key.key == SDLK_UP || event.key.key == SDLK_W) {
             mCurrentPoint = mCurrentPoint - 1;
             if (mCurrentPoint < 0)
                 mCurrentPoint = 3;
