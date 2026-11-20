@@ -6,9 +6,11 @@ class MenuScene : public Scene {
     private:
         int mCurrentPoint;
         Texture mPointerTexture;
+        Texture mBackGroundTexture;
         Texture mCool1Texture;
         Texture mCool2Texture;
         Texture mCool3Texture;
+        Texture mCool4Texture;
         Texture mTextTitleTexture;
         Texture mTextStartTexture;
         Texture mTextEditTexture;

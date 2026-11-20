@@ -6,11 +6,13 @@
 #include "../../include/other/global.hpp"
 
 bool MenuScene::enter() {
-    SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
+    SDL_Color textColor = {0x20, 0x20, 0x40, 0xFF};
+    mBackGroundTexture.loadFromFile("assets/images/bg_1.png");
     mPointerTexture.loadFromFile("assets/images/pointer.png");
     mCool1Texture.loadFromFile("assets/images/menu_1.png");
     mCool2Texture.loadFromFile("assets/images/menu_2.png");
     mCool3Texture.loadFromFile("assets/images/menu_3.png");
+    mCool4Texture.loadFromFile("assets/images/menu_4.png");
     mTextTitleTexture.loadFromRenderedText("Differ", textColor, gTitleFont);
     mTextStartTexture.loadFromRenderedText("Start level", textColor, gMainFont);
     mTextEditTexture.loadFromRenderedText("Edit level", textColor, gMainFont);
@@ -22,10 +24,12 @@ bool MenuScene::enter() {
 }
     
 bool MenuScene::exit() {
+    mBackGroundTexture.destroy();
     mPointerTexture.destroy();
     mCool1Texture.destroy();
     mCool2Texture.destroy();
     mCool3Texture.destroy();
+    mCool4Texture.destroy();
     mTextTitleTexture.destroy();
     mTextStartTexture.destroy();
     mTextEditTexture.destroy();
@@ -57,16 +61,18 @@ void MenuScene::handleEvent(SDL_Event &event) {
 void MenuScene::logic() {}
 
 void MenuScene::render() {
-    mPointerTexture.render(kScreenWidth - 45, 100 + (mPointerTexture.getHeight() / 2) + (20 * mCurrentPoint));
-    if (mCurrentPoint == 0) mCool1Texture.render(-60, 20, nullptr, SDL_FLIP_HORIZONTAL);
+    mBackGroundTexture.render(0, 0);
+    mPointerTexture.render(kScreenWidth - 35, 100 + (mPointerTexture.getHeight() / 2) + (20 * mCurrentPoint));
+    if (mCurrentPoint == 0) mCool1Texture.render(-70, 20, nullptr, SDL_FLIP_HORIZONTAL);
     if (mCurrentPoint == 1) mCool2Texture.render(20, 20);
-    if (mCurrentPoint == 3) mCool3Texture.render(40, 0);
-    mTextTitleTexture.render(kScreenWidth - 50 - mTextTitleTexture.getWidth(), 20);
-    mTextStartTexture.render(kScreenWidth - 60 - mTextStartTexture.getWidth(), 100);
-    mTextEditTexture.render(kScreenWidth - 60 - mTextEditTexture.getWidth(), 120);
-    mTextSettingsTexture.render(kScreenWidth - 60 - mTextSettingsTexture.getWidth(), 140);
-    mTextExitTexture.render(kScreenWidth - 60 - mTextExitTexture.getWidth(), 160);
-    mTextCopyrightTexture.render((kScreenWidth - mTextCopyrightTexture.getWidth()) / 2, kScreenHeight - mTextCopyrightTexture.getHeight());
+    if (mCurrentPoint == 2) mCool3Texture.render(40, 0);
+    if (mCurrentPoint == 3) mCool4Texture.render(40, 0);
+    mTextTitleTexture.render(kScreenWidth - 55 - mTextTitleTexture.getWidth(), 20);
+    mTextStartTexture.render(kScreenWidth - 40 - mTextStartTexture.getWidth(), 100);
+    mTextEditTexture.render(kScreenWidth - 40 - mTextEditTexture.getWidth(), 120);
+    mTextSettingsTexture.render(kScreenWidth - 40 - mTextSettingsTexture.getWidth(), 140);
+    mTextExitTexture.render(kScreenWidth - 40 - mTextExitTexture.getWidth(), 160);
+    mTextCopyrightTexture.render(kScreenWidth - 32 - mTextCopyrightTexture.getWidth(), kScreenHeight - mTextCopyrightTexture.getHeight());
 }
 
 MenuScene::MenuScene() {}
