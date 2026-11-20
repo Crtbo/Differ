@@ -8,7 +8,7 @@
 class EditScene : public Scene {
     private:
         const int kSpeed = 2;
-        const int kViewportOffset = 16;
+        const int kViewportOffset = 18;
         int mMapWidth, mMapHeight;
         int mCurrentTileType;
         bool mPlacing, mNaked;

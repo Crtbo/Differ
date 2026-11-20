@@ -99,8 +99,8 @@ void EditScene::logic() {
 
 void EditScene::render() {
     SDL_SetRenderViewport(gRenderer, &mSideViewport);
-    mInfoTextTexture.render(16, 0);
-    mTileTexture.render(0, 0, &gTileClips[mCurrentTileType]);
+    mInfoTextTexture.render(17, 1);
+    mTileTexture.render(1, 1, &gTileClips[mCurrentTileType]);
 
     if (SDL_GetMouseFocus()) // This is not good (two cursors for both viewports)
         mCursorTexture.render(mCursor.x - mCursorTexture.getWidth() / 2, mCursor.y - mCursorTexture.getHeight() / 2 + kViewportOffset);
