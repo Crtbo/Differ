@@ -6,7 +6,7 @@
 #include "../../include/other/global.hpp"
 
 bool MenuScene::enter() {
-    SDL_Color textColor = {0x20, 0x20, 0x40, 0xFF};
+    SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
     mBackGroundTexture.loadFromFile("assets/images/bg_1.png");
     mPointerTexture.loadFromFile("assets/images/pointer.png");
     mCool1Texture.loadFromFile("assets/images/menu_1.png");
@@ -71,16 +71,16 @@ void MenuScene::logic() {}
 void MenuScene::render() {
     mBackGroundTexture.render(0, 0, &mCurrentBg);
     mPointerTexture.render(kScreenWidth - 35, 100 + (mPointerTexture.getHeight() / 2) + (20 * mCurrentPoint));
-    if (mCurrentPoint == 0) mCool1Texture.render(-70, 20, nullptr, SDL_FLIP_HORIZONTAL);
+    if (mCurrentPoint == 0) mCool1Texture.render(-80, 20, nullptr, SDL_FLIP_HORIZONTAL);
     if (mCurrentPoint == 1) mCool2Texture.render(20, 20);
     if (mCurrentPoint == 2) mCool3Texture.render(40, 0);
     if (mCurrentPoint == 3) mCool4Texture.render(40, 0);
-    mTextTitleTexture.render(kScreenWidth - 55 - mTextTitleTexture.getWidth(), 20);
+    mTextTitleTexture.render(kScreenWidth - 30 - mTextTitleTexture.getWidth(), 20);
     mTextStartTexture.render(kScreenWidth - 40 - mTextStartTexture.getWidth(), 100);
     mTextEditTexture.render(kScreenWidth - 40 - mTextEditTexture.getWidth(), 120);
     mTextSettingsTexture.render(kScreenWidth - 40 - mTextSettingsTexture.getWidth(), 140);
     mTextExitTexture.render(kScreenWidth - 40 - mTextExitTexture.getWidth(), 160);
-    mTextCopyrightTexture.render(kScreenWidth - 32 - mTextCopyrightTexture.getWidth(), kScreenHeight - mTextCopyrightTexture.getHeight());
+    mTextCopyrightTexture.render(kScreenWidth - 40 - mTextCopyrightTexture.getWidth(), kScreenHeight - mTextCopyrightTexture.getHeight());
 }
 
 MenuScene::MenuScene() {}
