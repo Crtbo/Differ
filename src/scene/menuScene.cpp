@@ -20,6 +20,7 @@ bool MenuScene::enter() {
     mTextExitTexture.loadFromRenderedText("Exit game", textColor, gMainFont);
     mTextCopyrightTexture.loadFromRenderedText("ChRT 2026 ©", textColor, gMainFont);
     mCurrentPoint = 0;
+    mCurrentBg = {0, 0, (float)kBgWidth, (float)kBgHeight};
     return true;
 }
     
@@ -55,13 +56,20 @@ void MenuScene::handleEvent(SDL_Event &event) {
             if (mCurrentPoint < 0)
                 mCurrentPoint = 3;
         }
+
+        switch (mCurrentPoint) {
+            case 0: mCurrentBg.x = kBgWidth; mCurrentBg.y = 0; break;
+            case 1: mCurrentBg.x = 0; mCurrentBg.y = kBgHeight; break;
+            case 2: mCurrentBg.x = kBgWidth; mCurrentBg.y = kBgHeight; break;
+            case 3: mCurrentBg.x = 0; mCurrentBg.y = 0; break;
+        }
     }
 }
 
 void MenuScene::logic() {}
 
 void MenuScene::render() {
-    mBackGroundTexture.render(0, 0);
+    mBackGroundTexture.render(0, 0, &mCurrentBg);
     mPointerTexture.render(kScreenWidth - 35, 100 + (mPointerTexture.getHeight() / 2) + (20 * mCurrentPoint));
     if (mCurrentPoint == 0) mCool1Texture.render(-70, 20, nullptr, SDL_FLIP_HORIZONTAL);
     if (mCurrentPoint == 1) mCool2Texture.render(20, 20);

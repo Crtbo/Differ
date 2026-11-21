@@ -5,6 +5,7 @@
 class MenuScene : public Scene {
     private:
         int mCurrentPoint;
+        const int kBgWidth = 237, kBgHeight = 216;
         Texture mPointerTexture;
         Texture mBackGroundTexture;
         Texture mCool1Texture;
@@ -17,6 +18,7 @@ class MenuScene : public Scene {
         Texture mTextSettingsTexture;
         Texture mTextExitTexture;
         Texture mTextCopyrightTexture;
+        SDL_FRect mCurrentBg;
         static MenuScene sMenuScene;
 
         MenuScene();
