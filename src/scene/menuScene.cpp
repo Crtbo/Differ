@@ -8,6 +8,7 @@
 bool MenuScene::enter() {
     SDL_Color textColor = {0xFF, 0xFF, 0xFF, 0xFF};
     mBackGroundTexture.loadFromFile("assets/images/bg_1.png");
+    mAnimTexture.loadFromFile("assets/images/misc_anim.png");
     mPointerTexture.loadFromFile("assets/images/pointer.png");
     mCool1Texture.loadFromFile("assets/images/menu_1.png");
     mCool2Texture.loadFromFile("assets/images/menu_2.png");
@@ -19,13 +20,15 @@ bool MenuScene::enter() {
     mTextSettingsTexture.loadFromRenderedText("Settings", textColor, gMainFont);
     mTextExitTexture.loadFromRenderedText("Exit game", textColor, gMainFont);
     mTextCopyrightTexture.loadFromRenderedText("ChRT 2026 ©", textColor, gMainFont);
+    mAnim1.setFrames(0, 0, 4, kBgHeight, 4, 2);
     mCurrentPoint = 0;
-    mCurrentBg = {0, 0, (float)kBgWidth, (float)kBgHeight};
+    mCurrentBg = {(float)kBgWidth, 0, (float)kBgWidth, (float)kBgHeight};
     return true;
 }
     
 bool MenuScene::exit() {
     mBackGroundTexture.destroy();
+    mAnimTexture.destroy();
     mPointerTexture.destroy();
     mCool1Texture.destroy();
     mCool2Texture.destroy();
@@ -66,10 +69,14 @@ void MenuScene::handleEvent(SDL_Event &event) {
     }
 }
 
-void MenuScene::logic() {}
+void MenuScene::logic() {
+    mAnim1.loop();
+}
 
 void MenuScene::render() {
+    SDL_FRect frame = mAnim1.getFrame();
     mBackGroundTexture.render(0, 0, &mCurrentBg);
+    mAnimTexture.render(kBgWidth - 8, 0, &frame);
     mPointerTexture.render(kScreenWidth - 35, 100 + (mPointerTexture.getHeight() / 2) + (20 * mCurrentPoint));
     if (mCurrentPoint == 0) mCool1Texture.render(-80, 20, nullptr, SDL_FLIP_HORIZONTAL);
     if (mCurrentPoint == 1) mCool2Texture.render(20, 20);

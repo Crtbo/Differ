@@ -1,13 +1,15 @@
 #pragma once
 #include "scene.hpp"
+#include "../engine/animation.hpp"
 #include "../engine/texture.hpp"
 
 class MenuScene : public Scene {
     private:
         int mCurrentPoint;
         const int kBgWidth = 237, kBgHeight = 216;
-        Texture mPointerTexture;
         Texture mBackGroundTexture;
+        Texture mAnimTexture;
+        Texture mPointerTexture;
         Texture mCool1Texture;
         Texture mCool2Texture;
         Texture mCool3Texture;
@@ -18,6 +20,7 @@ class MenuScene : public Scene {
         Texture mTextSettingsTexture;
         Texture mTextExitTexture;
         Texture mTextCopyrightTexture;
+        Animation mAnim1;
         SDL_FRect mCurrentBg;
         static MenuScene sMenuScene;
 
