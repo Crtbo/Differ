@@ -49,11 +49,11 @@ void SettingsScene::handleEvent(SDL_Event &event) {
 
 void SettingsScene::logic() {
     mFaceAnimation.loop();
-    mCurrentFrame = mFaceAnimation.getFrame();
 }
 
 void SettingsScene::render() {
-    mFaceTexture.render((kScreenWidth - mFaceTexture.getWidth() / 2) / 2, kScreenHeight - mFaceTexture.getHeight() - 1, &mCurrentFrame);
+    SDL_FRect frame = mFaceAnimation.getFrame();
+    mFaceTexture.render((kScreenWidth - mFaceTexture.getWidth() / 2) / 2, kScreenHeight - mFaceTexture.getHeight() - 1, &frame);
     mTextInfoTexture.render((kScreenWidth - mTextInfoTexture.getWidth()) / 2, 60);
     mTextResoultionTexture.render((kScreenWidth - mTextResoultionTexture.getWidth()) / 2, 30);
 }
