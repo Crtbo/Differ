@@ -9,12 +9,12 @@ class MenuScene : public Scene {
         const int kBgWidth = 237, kBgHeight = 216;
         Texture mBackGroundTexture;
         Texture mAnimTexture;
+        Texture mTitleTexture;
         Texture mPointerTexture;
         Texture mCool1Texture;
         Texture mCool2Texture;
         Texture mCool3Texture;
         Texture mCool4Texture;
-        Texture mTextTitleTexture;
         Texture mTextStartTexture;
         Texture mTextEditTexture;
         Texture mTextSettingsTexture;
