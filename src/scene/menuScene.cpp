@@ -20,7 +20,7 @@ bool MenuScene::enter() {
     mTextSettingsTexture.loadFromRenderedText("Settings", textColor, gMainFont);
     mTextExitTexture.loadFromRenderedText("Exit game", textColor, gMainFont);
     mTextCopyrightTexture.loadFromRenderedText("ChRT 2026 ©", textColor, gMainFont);
-    mAnim1.setFrames(0, 0, 4, kBgHeight, 4, 2);
+    mAnim1.setFrames(0, 0, 4, kBgHeight, 3, 8);
     mCurrentPoint = 0;
     mCurrentBg = {(float)kBgWidth, 0, (float)kBgWidth, (float)kBgHeight};
     return true;
