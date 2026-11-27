@@ -78,6 +78,7 @@ void MenuScene::render() {
     mBackGroundTexture.render(0, 0, &mCurrentBg);
     mAnimTexture.render(kBgWidth - 8, 0, &frame);
     mTitleTexture.render(kBgWidth + ((kScreenWidth - kBgWidth) - mTitleTexture.getWidth()) / 2, 30);
+    mPointerTexture.render(kScreenWidth - 35, 98 + (mPointerTexture.getHeight() / 2) + (20 * mCurrentPoint));
     if (mCurrentPoint == 0) mCool1Texture.render(-80, 20, nullptr, SDL_FLIP_HORIZONTAL);
     if (mCurrentPoint == 1) mCool2Texture.render(20, 20);
     if (mCurrentPoint == 2) mCool3Texture.render(40, 0);
