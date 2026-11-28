@@ -1,6 +1,6 @@
 # Differ
 ## What is this?
-A platformer game made with C++ and SDL3
+A platformer game made with **C++** and **SDL3**.
 
 ## How to play?
 ### Menu
@@ -20,12 +20,19 @@ A platformer game made with C++ and SDL3
 - Changing tiles: `SCROLL` mouse wheel
 
 ## How to open game?
-Since the game is already compiled, all you need to do is click on the .exe file. You can also type `.\Differ.exe` in the terminal if you are in the root of the project
+Since the **game** is already **compiled**, all you need to do is click on the **.exe file**. You can also type `.\Differ.exe` in the **terminal** if you are in the **root of the project**.
 
 ## How to compile?
 use the following g++ line:
 
 `g++ src/*.cpp src/engine/*.cpp src/other/*.cpp src/scene/*.cpp -o "Differ" -I "C:\SDL3-3.4.0\x86_64-w64-mingw32\include" -I "C:\SDL3_image-3.4.0\x86_64-w64-mingw32\include" -I "C:\SDL3_ttf-3.2.2\x86_64-w64-mingw32\include" -L "C:\SDL3-3.4.0\x86_64-w64-mingw32\lib" -L "C:\SDL3_image-3.4.0\x86_64-w64-mingw32\lib" -L "C:\SDL3_ttf-3.2.2\x86_64-w64-mingw32\lib" -lSDL3 -lSDL3_image -lSDL3_ttf -mwindows`
 
-but you will need these libraries: `SDL3` `SDL3_image` `SDL3_ttf`
-and they will also have to be in aspecific place (although you could just change the stuff above)
+You will need these libraries: 
+
+`SDL3` available here *https://github.com/libsdl-org/SDL/releases*,
+
+`SDL3_image` available here *https://github.com/libsdl-org/SDL_image/releases*,
+
+`SDL3_ttf` available here *https://github.com/libsdl-org/SDL_ttf/releases*.
+
+You can change the **g++ line of code** to accommodate for a different version of a library and the path to that library.
